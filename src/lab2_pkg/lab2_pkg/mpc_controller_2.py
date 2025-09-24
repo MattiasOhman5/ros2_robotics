@@ -13,16 +13,19 @@ class MPC_Controller(Node):
         super().__init__('mpc_controller')
         self.cmd_pub = self.create_publisher(TwistStamped, '/cmd_vel', 10)
         self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
-        self.goal_sub = self.create_subscription(Pose, '/next_setpoint', self.goal_callback, 10)
 
-        self.goal = None
-        self.goal_tolerance = 0.05
         self.turtlebot_radius = 0.11
-        self.safety_distance = 0.05
+        self.safety_distance = 0.09
+        self.cx, self.cy = 0.0, 0.0
+        self.radius = 0.6
+        T = 15
+        self.omega = 2 * math.pi / T
+        self.latest_odom = None
 
         self.model = self.defineTBotModel()
         self.mpc = self.defineTBotMPC(model=self.model, ts=0.1, N=20)
 
+        self.control_timer = self.create_timer(0.1, self.control_loop)
 
     # ----------------- Define Model -----------------
     def defineTBotModel(self):
@@ -107,49 +110,39 @@ class MPC_Controller(Node):
 
         template = mpc.get_tvp_template()
         def tvp_fun(t_now):
-            return template  
+            for k in range(mpc.settings.n_horizon+1):
+                t = t_now + k * mpc.settings.t_step
+                template['_tvp', k, 'xdes'] = self.cx + self.radius * math.cos(self.omega * t)
+                template['_tvp', k, 'ydes'] = self.cy + self.radius * math.sin(self.omega * t)
+            return template
         mpc.set_tvp_fun(tvp_fun)
 
         mpc.setup()
         mpc.x0 = np.array([0.0, 0.0, 0.0]).reshape(-1, 1)
         mpc.set_initial_guess()
+
         return mpc
         
-    def goal_callback(self, msg):
-        gx, gy = msg.position.x, msg.position.y
-        self.goal = (gx, gy)
-        
-        tvp = self.mpc.get_tvp_template()
-        for k in range(self.mpc.settings.n_horizon+1):
-            tvp['_tvp', k, 'xdes'] = gx
-            tvp['_tvp', k, 'ydes'] = gy
-        self.mpc.set_tvp_fun(lambda t_now: tvp)
 
     def odom_callback(self, msg):
-        x = msg.pose.pose.position.x
-        y = msg.pose.pose.position.y
-        yaw = self.quaternion_to_yaw(msg.pose.pose.orientation)
+        self.latest_odom = msg
 
-        # Run MPC only if we have a goal
-        if self.goal is None:
+    def control_loop(self):
+        if self.latest_odom is None:
             return
 
+        x = self.latest_odom.pose.pose.position.x
+        y = self.latest_odom.pose.pose.position.y
+        yaw = self.quaternion_to_yaw(self.latest_odom.pose.pose.orientation)
+
+        x0 = np.array([x, y, yaw]).reshape(-1, 1)
+        self.mpc.x0 = x0
+        u0 = self.mpc.make_step(x0)
+
         cmd = TwistStamped()
-
-        gx, gy = self.goal
-        distance = math.sqrt((gx - x)**2 + (gy - y)**2)
-        if distance < self.goal_tolerance:
-            cmd.twist.linear.x = 0.0
-            cmd.twist.angular.z = 0.0
-
-        else:
-            x0 = np.array([x, y, yaw]).reshape(-1, 1)
-            u0 = self.mpc.make_step(x0)
-            cmd.twist.linear.x = float(u0[0])
-            cmd.twist.angular.z = float(u0[1])
-        
+        cmd.twist.linear.x = float(u0[0])
+        cmd.twist.angular.z = float(u0[1])
         self.cmd_pub.publish(cmd)
-
 
     def quaternion_to_yaw(self, q):
         A = 2.0 * (q.w * q.z + q.x * q.y)
