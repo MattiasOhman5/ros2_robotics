@@ -3,10 +3,10 @@ from rclpy.node import Node
 from geometry_msgs.msg import Pose, TwistStamped
 from nav_msgs.msg import Odometry
 import math
-import casadi
+import casadi as ca
 import os
 import numpy as np
-import opengen as og
+import do_mpc
 
 class MPC_Controller(Node):
     def __init__(self):
@@ -15,20 +15,108 @@ class MPC_Controller(Node):
         self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
         self.goal_sub = self.create_subscription(Pose, '/next_setpoint', self.goal_callback, 10)
 
-        package_dir = os.path.dirname(os.path.realpath(__file__))
-        optimizer_path = os.path.join(package_dir, "bd", "turtle_mpc")
-        self.mng = og.tcp.OptimizerTcpManager(optimizer_path)
-        self.mng.start()
-
         self.goal = None
-        self.current_state = None
-        self.N = 15
-        self.u_prev  = [0.0] * (2 * self.N)
 
+        self.model = self.defineTBotModel()
+        self.mpc = self.defineTBotMPC(model=self.model, ts=0.1, N=20)
+
+
+    # ----------------- Define Model -----------------
+    def defineTBotModel(self):
+
+        model_type = 'continuous'
+        model = do_mpc.model.Model(model_type)
+
+        # States
+        x = model.set_variable(var_type='_x', var_name='x', shape=(1,1))
+        y = model.set_variable(var_type='_x', var_name='y', shape=(1,1))
+        th = model.set_variable(var_type='_x', var_name='th', shape=(1,1))
+
+        # Inputs
+        vx = model.set_variable(var_type='_u', var_name='vx')
+        vt = model.set_variable(var_type='_u', var_name='vt')
+
+        # Time-varying parameters (setpoints)
+
+        xdes = model.set_variable(var_type='_tvp', var_name='xdes')
+        ydes = model.set_variable(var_type='_tvp', var_name='ydes')
+
+        # Dynamics
+        model.set_rhs('x', vx*ca.cos(th))
+        model.set_rhs('y', vx*ca.sin(th))
+        model.set_rhs('th', vt)
+
+        model.setup()
+        return model
+    
+    # ----------------- Setup MPC -----------------
+    def defineTBotMPC(self, model, ts, N):
+        mpc = do_mpc.controller.MPC(model)
+        setup_mpc = {
+            'n_horizon': N,
+            't_step': ts,
+            'n_robust': 1,
+            'store_full_solution': True
+        }
+        mpc.set_param(**setup_mpc)
+
+        # Objective
+        lterm = (model.x['x'] - model.tvp['xdes'])**2 + (model.x['y'] - model.tvp['ydes'])**2
+        mterm = lterm
+        mpc.set_objective(mterm=mterm, lterm=lterm)
+        mpc.set_rterm(vx=1e-2, vt=1e-2)
+
+        # State Bounds
+        mpc.bounds['lower','_x','x'] = -1.0
+        mpc.bounds['upper','_x','x'] =  1.0
+        mpc.bounds['lower','_x','y'] = -1.0
+        mpc.bounds['upper','_x','y'] =  1.0
+
+        # Input Constraints
+        mpc.bounds['lower','_u','vx'] = 0.0
+        mpc.bounds['upper','_u','vx'] =  0.5
+        mpc.bounds['lower','_u','vt'] = -0.8
+        mpc.bounds['upper','_u','vt'] =  0.8
+
+        # Nonlinear Constraint for Obstacle 1
+        x_obs1 = 0.5
+        y_obs1 = 0.1
+        r_obs1 = 0.2
+        mpc.set_nl_cons(
+            'obs1',
+            r_obs1**2 - ((model.x['x']-x_obs1)**2 + (model.x['y']-y_obs1)**2),
+            ub=0.0,
+            soft_constraint=False   # <-- no penalty, enforced strictly
+        )
+
+        # Nonlinear Constraint for Obstacle 2
+        x_obs2 = 1.4
+        y_obs2 = -0.3
+        r_obs2 = 0.3
+        mpc.set_nl_cons(
+            'obs2',
+            r_obs2**2 - ((model.x['x']-x_obs2)**2 + (model.x['y']-y_obs2)**2),
+            ub=0.0,
+            soft_constraint=False   # <-- no penalty, enforced strictly
+        )
+
+        template = mpc.get_tvp_template()
+        def tvp_fun(t_now):
+            return template  # will be filled each time
+        mpc.set_tvp_fun(tvp_fun)
+
+        mpc.setup()
+        return mpc
+        
     def goal_callback(self, msg):
         gx, gy = msg.position.x, msg.position.y
         self.goal = (gx, gy)
-        #self.get_logger().info(f"New goal: ({gx:.2f}, {gy:.2f})")
+        
+        tvp = self.mpc.get_tvp_template()
+        for k in range(self.mpc.settings.n_horizon+1):
+            tvp['_tvp', k, 'xdes'] = gx
+            tvp['_tvp', k, 'ydes'] = gy
+        self.mpc.set_tvp_fun(lambda t_now: tvp)
 
     def odom_callback(self, msg):
         x = msg.pose.pose.position.x
@@ -37,32 +125,17 @@ class MPC_Controller(Node):
 
         # Run MPC only if we have a goal
         if self.goal is None:
-            return
-        
-        gx, gy = self.goal
-        p_val = np.array([x, y, yaw, gx, gy])
+            return        
 
-        sol = self.mng.call(p_val, initial_guess = self.u_prev, buffer_len=8*4096)
+        x0 = np.array([x, y, yaw]).reshape(-1, 1)
+        u0 = self.mpc.make_step(x0)
 
-        if not sol.is_ok():
-            self.get_logger().warn("MPC solver failed")
-            return
-        
-        U = np.array(sol['solution'])
-        v_seq = U[0:self.N]
-        w_seq = U[self.N:]
-        v0, w0 = v_seq[0], w_seq[0]
-
-        self.u_prev = np.hstack((U[2:], [0.0, 0.0]))
 
         cmd = TwistStamped()
-        cmd.twist.linear.x = float(v0)
-        cmd.twist.angular.z = float(w0)
+        cmd.twist.linear.x = float(u0[0])
+        cmd.twist.angular.z = float(u0[1])
         self.cmd_pub.publish(cmd)
 
-        #self.get_logger().info(
-        #    f"MPC cmd: v={v0:.2f}, w={w0:.2f} | pos=({x:.2f}, {y:.2f}) → goal=({gx:.2f}, {gy:.2f})"
-        #)
 
     def quaternion_to_yaw(self, q):
         A = 2.0 * (q.w * q.z + q.x * q.y)
