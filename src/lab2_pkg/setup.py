@@ -25,7 +25,9 @@ setup(
             'mpc_controller_2=lab2_pkg.mpc_controller_2:main',
             'trajectory_1=lab2_pkg.trajectory_1:main',
             'trajectory_2=lab2_pkg.trajectory_2:main',
-            'trajectory_circle=lab2_pkg.trajectory_circle:main'
+            'trajectory_circle=lab2_pkg.trajectory_circle:main',
+            'mpc_controller_sim=lab2_pkg.mpc_controller_sim:main',
+            'mpc_controller_2_sim=lab2_pkg.mpc_controller_2_sim:main',
         ],
     },
 )

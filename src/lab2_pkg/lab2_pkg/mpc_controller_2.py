@@ -11,7 +11,7 @@ import do_mpc
 class MPC_Controller(Node):
     def __init__(self):
         super().__init__('mpc_controller')
-        self.cmd_pub = self.create_publisher(TwistStamped, '/cmd_vel', 10)
+        self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
 
         self.turtlebot_radius = 0.11
@@ -139,9 +139,9 @@ class MPC_Controller(Node):
         self.mpc.x0 = x0
         u0 = self.mpc.make_step(x0)
 
-        cmd = TwistStamped()
-        cmd.twist.linear.x = float(u0[0])
-        cmd.twist.angular.z = float(u0[1])
+        cmd = Twist()
+        cmd.linear.x = float(u0[0])
+        cmd.angular.z = float(u0[1])
         self.cmd_pub.publish(cmd)
 
     def quaternion_to_yaw(self, q):

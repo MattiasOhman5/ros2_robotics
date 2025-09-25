@@ -11,7 +11,7 @@ import do_mpc
 class MPC_Controller(Node):
     def __init__(self):
         super().__init__('mpc_controller')
-        self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.cmd_pub = self.create_publisher(TwistStamped, '/cmd_vel', 10)
         self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
         self.goal_sub = self.create_subscription(Pose, '/next_setpoint', self.goal_callback, 10)
 
@@ -134,19 +134,19 @@ class MPC_Controller(Node):
         if self.goal is None:
             return
 
-        cmd = Twist()
+        cmd = TwistStamped()
 
         gx, gy = self.goal
         distance = math.sqrt((gx - x)**2 + (gy - y)**2)
         if distance < self.goal_tolerance:
-            cmd.linear.x = 0.0
-            cmd.angular.z = 0.0
+            cmd.twist.linear.x = 0.0
+            cmd.twist.angular.z = 0.0
 
         else:
             x0 = np.array([x, y, yaw]).reshape(-1, 1)
             u0 = self.mpc.make_step(x0)
-            cmd.linear.x = float(u0[0])
-            cmd.angular.z = float(u0[1])
+            cmd.twist.linear.x = float(u0[0])
+            cmd.twist.angular.z = float(u0[1])
         
         self.cmd_pub.publish(cmd)
 
