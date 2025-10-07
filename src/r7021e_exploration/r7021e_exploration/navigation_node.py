@@ -18,7 +18,6 @@ import tf2_ros
 import numpy as np
 from r7021e_exploration.rrt import RRT, Node as RRTNode
 from scipy.ndimage import binary_dilation
-from sklearn.cluster import DBSCAN
 from visualization_msgs.msg import Marker
 from geometry_msgs.msg import Point
 
@@ -63,6 +62,8 @@ class PathPlannerNode(Node):
 
         default_qos = QoSProfile(depth=10)
 
+        self.status = "starting"
+
         # Publishers (add path publisher here)
         self.path_pub =  self.create_publisher(Path, path_topic, default_qos)
 
@@ -84,16 +85,22 @@ class PathPlannerNode(Node):
 
         self.current_idx = -1
         self.current_path = None
-        self.arrival_tolerance = 0.05
+        self.arrival_tolerance = 0.1
 
+        # skriv koordinaterna som (x, y)
+        # self.paths = [
+        #     [(0.0, 0.0), (0.5, -1.0), (3.5, -1.0), (3.5, 2.0), (0.5, 2.0)],
+        #     [(0.5, 1.0), (3.5, 1.0), (3.5, 0.0), (0.0, 0.0), (0.5, -1.0)],
+        #     [(1.5, -1.0), (1.5, 2.0), (2.5, 2.0), (2.5, 0.0)],
+        # ]
+
+        # bara en liten 0.5x0.5 kvadrat
         self.paths = [
-            [(0.0, 0.0), (0.5, -1.0), (3.5, -1.0), (3.5, 2.0), (0.5, 2.0)],
-            [(0.5, 1.0), (3.5, 1.0), (3.5, 0.0), (0.0, 0.0), (0.5, -1.0)],
-            [(1.5, -1.0), (1.5, 2.0), (2.5, 2.0), (2.5, 0.0)],
-        ]
+            [(0.0, 0.0), (0.5, 0.0), (0.5, 0.5)],
+            [(0.5, 0.5), (0.0, 0.5), (0.0, 0.0)]]
 
-        #self._timer = self.create_timer(0.1, self._tick)
-        self._timer = self.create_timer(2.0, self._on_timer)
+        #self._timer = self.create_timer(2.0, self._tick1)
+        self._timer = self.create_timer(2.0, self._tick4)
 
         self.get_logger().info('PathPlannerNode initialized.')
 
@@ -114,14 +121,14 @@ class PathPlannerNode(Node):
 
         return path
     
-    def _publish_next_path(self) -> None:
-        self.current_idx = (self.current_idx + 1) % len(self.paths)
+    def _publish_next_path(self):
+        self.current_idx = (self.current_idx + 1) % len(self.paths) # blir en loop återgår till första pathen tack vare modulo
         self.current_path = self._make_path(self.paths[self.current_idx])
         self.path_pub.publish(self.current_path)
         self.get_logger().info(f'Published path {self.current_idx + 1}/{len(self.paths)}')
 
-
-    def _tick(self) -> None:
+    # visar att vi kan skicka path_msgs till controller
+    def _tick1(self):
         if self.current_path is None:
             pose = self.get_robot_pose()
             if pose is None:
@@ -140,6 +147,39 @@ class PathPlannerNode(Node):
         if dist < self.arrival_tolerance:
             self.get_logger().info('Reached goal, publishing next path')
             self._publish_next_path()
+
+    # denna funktion kör exploration i task 4. Avståndscheck är tidsbaserad och path-planner körs när robot är tillräckligt nära slutmålet
+    # av nuvarande path
+    # rätt mkt felhantering här, hade nog kunnat snyggas till
+    def _tick4(self):
+        if self._latest_map is None or self._latest_frontier is None:
+            self.get_logger().warn("Waiting for map and frontier...")
+            return
+
+        if self.status == "starting":
+            pose = self.get_robot_pose()
+            if pose is None:
+                return
+            
+            self.status = "running"
+            current_path = self.plan_path(pose, self._latest_map, self._latest_frontier)
+            if current_path:
+                self.current_path = current_path
+            return
+
+        pose = self.get_robot_pose()
+        if pose is None:
+            return
+
+        x, y, _ = pose
+        goal = self.current_path.poses[-1].pose.position
+        dist = math.hypot(goal.x - x, goal.y - y)
+
+        if dist < self.arrival_tolerance:
+            self.get_logger().info('Reached goal, publishing next path')
+            current_path = self.plan_path(pose, self._latest_map, self._latest_frontier)
+            if current_path:
+                self.current_path = current_path
 
 
     # ----------------- TF Helper -----------------
@@ -177,214 +217,104 @@ class PathPlannerNode(Node):
         """Trigger planning when a new map arrives."""
         self._latest_map = msg
 
-        print(msg)
-
-        pose = self.get_robot_pose()
-        if pose is None:
-            return
-
-        x, y, yaw = pose
-        # path = self.plan_path((x, y, yaw),
-        #                       msg,
-        #                       self._latest_frontier)
-
-        # if path is None:
-        #     return
-        
-    def _on_timer(self):
-        if self._latest_map is None or self._latest_frontier is None:
-            self.get_logger().warn("Map or frontier not yet received, skipping planning.")
-            return
-
-        pose = self.get_robot_pose()
-        if pose is None:
-            return
-
-        # # Optional: skip if robot already near goal
-        # if self.last_goal is not None:
-        #     gx, gy = self.last_goal
-        #     rx, ry, _ = pose
-        #     if math.hypot(gx - rx, gy - ry) < 0.2:
-        #         return  # already close enough to goal
-
-        # Plan new path
-        path = self.plan_path(pose, self._latest_map, self._latest_frontier)
-        #if path is not None:
-        #    self.last_goal = path.poses[-1].pose.position
-
 
     # task 3: anti collision
 
     def inflate_grid(self, map_msg: OccupancyGrid, iterations):
-        width = map_msg.info.width
-        height = map_msg.info.height
-
-        grid = np.array(map_msg.data).reshape((height, width))
-
+        
+        # en ros-grid är bara en lista med grid-värden -> gör om till 2D-array istället
+        grid = self.convert2grid(map_msg)
+        # skapar en boolean mask -> alltså platser där grid-värdet = 100 kommer ha True
         occupied = grid == 100
 
+        # ett fönster som är 3x3 eftersom 8 celler runt den aktuella ska markeras som occupied
         structure = np.ones((3, 3), dtype=bool)
+        # från schipy.ndimage: https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.binary_dilation.html
         inflated = binary_dilation(occupied, structure=structure, iterations=iterations)
 
         grid[inflated] = 100
 
         map_msg.data = grid.flatten().tolist()
 
-        # inflated = grid.copy()
-        # for _ in range(iterations):
-        #     temp = inflated.copy()
-        #     for y in range(height):
-        #         for x in range(width):
-        #             if inflated[y, x] == 100:
-        #                 for dy in [-1, 0, 1]:
-        #                     for dx in [-1, 0, 1]:
-        #                         ny = y + dy
-        #                         nx = x + dx
-        #                         if 0 <= ny < height and 0 <= nx < width:
-        #                             temp[ny, nx] = 100
-        #     inflated = temp.copy()
-
-        # map_msg.data = inflated.flatten().tolist()
         return map_msg
     
     # task 4: frontier
 
-    def convert_frontier(self, frontier_msg):
-        width = frontier_msg.info.width
-        height = frontier_msg.info.height
-        res = frontier_msg.info.resolution
-        origin = frontier_msg.info.origin
-
-        data = np.array(frontier_msg.data).reshape((height, width))
-        ys, xs = np.where(data > 0)
-
-        x_world = origin.position.x + xs * res
-        y_world = origin.position.y + ys * res
-
-        return np.column_stack((x_world, y_world))
+    # ---- testade ny grej
     
-    def cluster_frontier(self, frontier_points, eps, min_samples):
-        if len(frontier_points) == 0:
-            return []
-        
-        clustering = DBSCAN(eps=eps, min_samples=min_samples).fit(frontier_points)
-        labels = clustering.labels_
+    def convert2grid(self, occupancy_grid_msg):
+        width = occupancy_grid_msg.info.width
+        height = occupancy_grid_msg.info.height
 
-        clusters = []
-        for label in set(labels):
-            if label == -1:
-                continue
-            cluster = frontier_points[labels == label]
-            clusters.append(cluster)
+        map_grid = np.array(occupancy_grid_msg.data).reshape((height, width))
 
-        return clusters
-    
-    def select_frontier(self, frontier_msg, map_msg, window_size, max_candidates):
-        map_h = map_msg.info.height
-        map_w = map_msg.info.width
-        map_res = map_msg.info.resolution
-        map_origin = map_msg.info.origin.position
+        return map_grid
 
-        f_h = frontier_msg.info.height
-        f_w = frontier_msg.info.width
-
-        map_grid = np.array(map_msg.data).reshape((map_h, map_w))
-        frontier_grid = np.array(frontier_msg.data).reshape((f_h, f_w))
-
-        half_win = window_size // 2
-        candidates = []
-
+    def goal_generation(self, frontier_msg, n_goals):
+        # målet med denna är att generera en lista med möjliga mål som vi kör RRT på
+        frontier_grid = self.convert2grid(frontier_msg)
+        # hitta all koordinater där vi har frontier points
         ys, xs = np.where(frontier_grid == 100)
-        for y, x in zip(ys, xs):
-            # Skip if cell is occupied
-            if map_grid[y, x] == 100:
-                continue
 
-            y_min = max(0, y - half_win)
-            y_max = min(map_h, y + half_win + 1)
-            x_min = max(0, x - half_win)
-            x_max = min(map_w, x + half_win + 1)
-
-            window = map_grid[y_min:y_max, x_min:x_max]
-            unknown_count = np.sum(window == -1)
-
-            if unknown_count > 0:
-                x_world = map_origin.x + x * map_res
-                y_world = map_origin.y + y * map_res
-                candidates.append((unknown_count, (x_world, y_world)))
-
-        if not candidates:
-            self.get_logger().warn("No valid frontier candidates found.")
+        if len(xs) == 0:
+            self.get_logger().warn("No frontier points available.")
             return []
 
-        # Sort candidates by unknown_count (descending) without lambda
-        for i in range(len(candidates)):
-            for j in range(i + 1, len(candidates)):
-                if candidates[j][0] > candidates[i][0]:
-                    candidates[i], candidates[j] = candidates[j], candidates[i]
+        indices = np.arange(len(xs))
+        # blanda koordinaterna för att sampla random frontier points https://arxiv.org/abs/2104.03724?
+        np.random.shuffle(indices)
+        selected = indices[:min(n_goals, len(xs))]
 
-        top_candidates = []
-        count = min(max_candidates, len(candidates))
-        for i in range(count):
-            top_candidates.append(candidates[i][1])
+        goals = []
+        for i in selected:
+            x, y = xs[i], ys[i]
 
-        self.get_logger().info(
-            f"Found {len(top_candidates)} promising frontier goals."
-        )
+            xw = frontier_msg.info.origin.position.x + x * frontier_msg.info.resolution
+            yw = frontier_msg.info.origin.position.y + y * frontier_msg.info.resolution
+            goals.append((xw, yw))
+        
+        self.get_logger().info(f"Generated {len(goals)} goals.")
 
-        return top_candidates
+        return goals
     
-    def select_frontier_goal(self, clusters, robot_pose):
-        if not clusters:
-            return None
+    def compute_information_gain(self, path, map_msg, sensor_range):
+        # vi räknar hur många unknown celler är runt varje delpunkt i en path
+        # information gain är hög om man åker till ett ställe där man upptäcker många unknown celler
+        grid = self.convert2grid(map_msg)
+        origin = map_msg.info.origin
+        resolution = map_msg.info.resolution
+        width = map_msg.info.width
+        height = map_msg.info.height
+        radius_cells = int(sensor_range / map_msg.info.resolution)
+        discovered = set()
 
-        rx, ry, _ = robot_pose
+        if path == []:
+            return float('inf')
 
-        max_dist = -1.0
-        best_cluster = None
+        for xw, yw in path:
+            gx = int((xw - origin.position.x) / resolution)
+            gy = int((yw - origin.position.y) / resolution)
+            
+            if gx < 0 or gy < 0 or gx >= width or gy >= height:
+                continue
 
-        for cluster in clusters:
-            cx, cy = np.mean(cluster, axis=0)
-            dist = math.hypot(cx - rx, cy - ry)
-            if dist > max_dist:
-                max_dist = dist
-                best_cluster = cluster
+            x_min = max(0, gx - radius_cells)
+            x_max = min(width, gx + radius_cells)
+            y_min = max(0, gy - radius_cells)
+            y_max = min(height, gy + radius_cells)
 
-        if best_cluster is None:
-            return None
+            window = np.where(grid[y_min:y_max, x_min:x_max] == -1)
 
-        centroid = np.mean(best_cluster, axis=0)
-        return (float(centroid[0]), float(centroid[1]))
+            for y, x in zip(window[0], window[1]):
+                discovered.add((x + x_min, y + y_min))
+
+        return len(discovered)
     
-    # visualization
+    def total_cost(self, path_cost, info_gain, path_weight, info_weight):
+        # kombinera kostnaden för path och information gain för att välja den bästa path
+        # notera att jag har dock inte tune:at dessa vikter men den verkar fungera iaf
+        return path_cost * path_weight - info_gain * info_weight
 
-    def publish_frontier_marker(self, goal):
-        if goal is None:
-            return
-
-        marker = Marker()
-        marker.header.frame_id = self.global_frame
-        marker.header.stamp = self.get_clock().now().to_msg()
-        marker.ns = "goal_marker"
-        marker.id = 0
-        marker.type = Marker.POINTS
-        marker.action = Marker.ADD
-        marker.scale.x = 0.2  # point size
-        marker.scale.y = 0.2
-        marker.color.r = 1.0
-        marker.color.g = 0.0
-        marker.color.b = 0.0
-        marker.color.a = 1.0
-
-        p = Point()
-        p.x = goal[0]
-        p.y = goal[1]
-        p.z = 0.0
-        marker.points.append(p)
-
-        marker.lifetime.sec = 0  # persistent
-        self.marker_pub.publish(marker)
-        self.get_logger().info(f"Published frontier marker at ({goal[0]:.2f}, {goal[1]:.2f})")
     # ----------------- Planning -----------------
 
     def plan_path(self,
@@ -402,34 +332,56 @@ class PathPlannerNode(Node):
             self.get_logger().warn("Frontier message not yet received, skipping planning.")
             return None
 
-        #frontier_points = self.convert_frontier(frontier_msg)
-        #clusters = self.cluster_frontier(frontier_points, eps=0.3, min_samples=3)
-        #goal = self.select_frontier_goal(clusters, pose)
+        # börja med att inflate all obstacles så vi inte planerar för tajt path (task 3)
+        inflated = self.inflate_grid(map_msg, 4)
 
-        goal_candidates = self.select_frontier(frontier_msg, map_msg, 5, 20)
+        # generera en lista med n_goals vi kan planera path till
+        goals = self.goal_generation(frontier_msg, n_goals=50)
 
-        #self.publish_frontier_marker(goal)
+        if not goals:
+            self.get_logger().warn("No goals generated from frontiers.")
+            return None
 
-        inflated = self.inflate_grid(map_msg, 3)
+        self.get_logger().info(f"Trying {len(goals)} frontier goals...")
 
-        root_node = RRTNode(start_x, start_y)
-        #planner = RRT(node=root_node, occupancy_grid=inflated, num_iterations=8000, goal=goal)
+        # håll koll på den bästa pathen
+        best_path = []
+        best_cost = float('inf')
+        fail_count = 0
+        
+        # kör rrt på all potentiella mål
+        for goal in goals:
+            root_node = RRTNode(start_x, start_y)
+            self.get_logger().warn(f"Starting RRT with goal {goal}")
 
-        path = []
-        for goal in goal_candidates:
-            self.get_logger().warn(f"Starting RRT with {goal}")
-            planner = RRT(node=root_node, occupancy_grid=inflated, num_iterations=2000, goal=goal)
+            planner = RRT(
+                node=root_node,
+                occupancy_grid=inflated,
+                num_iterations=500,
+                goal=goal
+            )
             planner.run_RRT()
-            path = planner.extract_best_path()
-            self.get_logger().warn(f"Finishing RRT")
-            if path != []:
-                break
+            path, path_cost = planner.extract_best_path()
 
+            info_gain = self.compute_information_gain(path, map_msg, sensor_range=2.0)
+            total_cost = self.total_cost(path_cost, info_gain, path_weight=3.0, info_weight=2.0)
 
+            if path == []:
+                fail_count += 1
 
-        path_msg = self._make_path(path)
+            if total_cost < best_cost:
+                best_cost = total_cost
+                best_path = path
+
+        self.get_logger().info(f"failed {fail_count}/{len(goals)}")
+
+        if best_path == []:
+            return None
+
+        # publicera den bästa path vi hittade
+        path_msg = self._make_path(best_path)
         self.path_pub.publish(path_msg)
-        self.get_logger().info(f"Published RRT* path with {len(path)} points.")
+        self.get_logger().info(f"Published RRT* path with {len(best_path)} points.")
 
         return path_msg
 

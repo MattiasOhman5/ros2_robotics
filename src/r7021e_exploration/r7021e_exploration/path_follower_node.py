@@ -28,7 +28,7 @@ class PathFollower(Node):
         self.max_w = float(self.get_parameter('max_w').value)
         self.kp_yaw = float(self.get_parameter('kp_yaw').value)
         self.look_ahead = float(self.get_parameter('look_ahead').value)
-        self.goal_tol = 0.1
+        self.goal_tol = 0.07
 
         # subscriptions and publishers
         self.map_sub = self.create_subscription(
