@@ -357,7 +357,7 @@ class PathPlannerNode(Node):
             planner = RRT(
                 node=root_node,
                 occupancy_grid=inflated,
-                num_iterations=500,
+                num_iterations=50000,
                 goal=goal
             )
             planner.run_RRT()
@@ -373,17 +373,23 @@ class PathPlannerNode(Node):
                 best_cost = total_cost
                 best_path = path
 
+            if path != []:
+                path_msg = self._make_path(best_path)
+                self.path_pub.publish(path_msg)
+                self.get_logger().info(f"Published RRT* path with {len(best_path)} points.")
+                return path_msg
+
         self.get_logger().info(f"failed {fail_count}/{len(goals)}")
 
         if best_path == []:
             return None
 
         # publicera den bästa path vi hittade
-        path_msg = self._make_path(best_path)
-        self.path_pub.publish(path_msg)
-        self.get_logger().info(f"Published RRT* path with {len(best_path)} points.")
+        # path_msg = self._make_path(best_path)
+        # self.path_pub.publish(path_msg)
+        # self.get_logger().info(f"Published RRT* path with {len(best_path)} points.")
 
-        return path_msg
+        #return path_msg
 
 
 def main() -> None:

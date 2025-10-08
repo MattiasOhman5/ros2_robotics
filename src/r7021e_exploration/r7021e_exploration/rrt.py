@@ -37,7 +37,7 @@ class RRT():
         self.step_size = 0.30
         self.sample_goal_bias = 0.05
         self.goal = goal
-        self.r_goal = 0.15
+        self.r_goal = 0.35
         self.best_cost = float('inf')
         self.best_node = None
 
@@ -46,6 +46,8 @@ class RRT():
 
         self.gamma_rrt = 2.0
         self.d = 2
+
+        self.sols_found = 0
 
     def add_node(self, new_node):
         self.nodes.append(new_node)
@@ -149,7 +151,7 @@ class RRT():
             value = self.og.data[index]
 
             # en cell är occupied om det har värdet 100
-            if value == 100 or value == -1:
+            if value == 100: #or value == -1:
                 return False
 
         return True
@@ -160,7 +162,7 @@ class RRT():
     
     # använd en målzon för annars måste man sampla exakta målkoordinaterna för att hitta lösning
     def in_goal_region(self, x):
-        return math.hypot(x[0] - self.goal[0], x[1] - self.goal[1]) < self.r_goal
+        return math.hypot(x[0] - self.goal[0], x[1] - self.goal[1]) < self.r_goal # den behövde sättas större in inflate för annars kan man inte nå många frontiers
             
     # helper
 
@@ -271,10 +273,14 @@ class RRT():
 
             # vi sparar den bäst väg vi hittar eftersom vi kör den en bestämd mängd iterationer
                 if self.in_goal_region(x_new):
+                    self.sols_found += 1
                     if x_new_node.cost < self.best_cost:
                         self.best_cost = x_new_node.cost
                         self.best_node = x_new_node
                         print(f"Found new best node, cost = {self.best_cost:.3f}")
+
+                    if self.sols_found == 5:
+                        return
 
         print("finished RRT")          
         return
