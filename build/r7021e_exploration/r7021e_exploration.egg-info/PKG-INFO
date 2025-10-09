@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: r7021e_exploration
+Version: 0.0.0
+Summary: Exploration template package for R7021E
+Maintainer: name
+Maintainer-email: name@users.org
+License: MIT
+Requires-Dist: setuptools
+Dynamic: license
+Dynamic: maintainer
+Dynamic: maintainer-email
+Dynamic: requires-dist
+Dynamic: summary

@@ -1,0 +1,536 @@
+[0.000000] (-) TimerEvent: {}
+[0.000287] (crazyflie_interfaces) JobQueued: {'identifier': 'crazyflie_interfaces', 'dependencies': OrderedDict()}
+[0.000329] (r7021e_exploration) JobQueued: {'identifier': 'r7021e_exploration', 'dependencies': OrderedDict()}
+[0.000370] (turtlebot3_fake_node) JobQueued: {'identifier': 'turtlebot3_fake_node', 'dependencies': OrderedDict()}
+[0.000391] (turtlebot3_gazebo) JobQueued: {'identifier': 'turtlebot3_gazebo', 'dependencies': OrderedDict()}
+[0.000408] (turtlebot3_trailer) JobQueued: {'identifier': 'turtlebot3_trailer', 'dependencies': OrderedDict()}
+[0.002438] (crazyflie) JobQueued: {'identifier': 'crazyflie', 'dependencies': OrderedDict({'crazyflie_interfaces': '/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces'})}
+[0.002513] (crazyflie_py) JobQueued: {'identifier': 'crazyflie_py', 'dependencies': OrderedDict({'crazyflie_interfaces': '/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces'})}
+[0.002556] (crazyflie_sim) JobQueued: {'identifier': 'crazyflie_sim', 'dependencies': OrderedDict({'crazyflie_interfaces': '/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces'})}
+[0.002577] (turtlebot3_simulations) JobQueued: {'identifier': 'turtlebot3_simulations', 'dependencies': OrderedDict({'turtlebot3_fake_node': '/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node', 'turtlebot3_gazebo': '/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo'})}
+[0.002719] (crazyflie_examples) JobQueued: {'identifier': 'crazyflie_examples', 'dependencies': OrderedDict({'crazyflie_interfaces': '/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces', 'crazyflie_py': '/home/ubuntuuser/ros2_ws/install/crazyflie_py'})}
+[0.002762] (crazyflie_interfaces) JobStarted: {'identifier': 'crazyflie_interfaces'}
+[0.013639] (turtlebot3_fake_node) JobStarted: {'identifier': 'turtlebot3_fake_node'}
+[0.021997] (turtlebot3_gazebo) JobStarted: {'identifier': 'turtlebot3_gazebo'}
+[0.029360] (r7021e_exploration) JobStarted: {'identifier': 'r7021e_exploration'}
+[0.044270] (crazyflie_interfaces) JobProgress: {'identifier': 'crazyflie_interfaces', 'progress': 'cmake'}
+[0.045371] (crazyflie_interfaces) Command: {'cmd': ['/usr/bin/cmake', '/home/ubuntuuser/ros2_ws/src/crazyswarm2/crazyflie_interfaces', '-DCMAKE_INSTALL_PREFIX=/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces'], 'cwd': '/home/ubuntuuser/ros2_ws/build/crazyflie_interfaces', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'ubuntuuser', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'wayland', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntuuser', 'OLDPWD': '/home/ubuntuuser', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PS1': '(.venv) \\[\\e]0;\\u@\\h: \\w\\a\\]${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$', 'SYSTEMD_EXEC_PID': '2947', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntuuser', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'ubuntuuser', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'PATH': '/home/ubuntuuser/ros2_ws/.venv/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/ubuntuuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/ubuntuuserVB:@/tmp/.ICE-unix/2915,unix/ubuntuuserVB:/tmp/.ICE-unix/2915', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/51b2a895_ce38_4490_b69f_ba299d810c30', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'VIRTUAL_ENV_PROMPT': '(.venv)', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.XQG2D3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.272', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'ROS_DOMAIN_ID': '30', 'AMENT_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/turtlebot3_simulations:/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo:/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_sim:/home/ubuntuuser/ros2_ws/install/crazyflie_examples:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/home/ubuntuuser/ros2_ws/install/crazyflie:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VIRTUAL_ENV': '/home/ubuntuuser/ros2_ws/.venv', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/ubuntuuser/ros2_ws/build/crazyflie_interfaces', 'TURTLEBOT3_MODEL': 'burger', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_sim/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_examples/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_py/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_simulations:/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo:/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node:/home/ubuntuuser/ros2_ws/install/crazyflie_sim:/home/ubuntuuser/ros2_ws/install/crazyflie_examples:/home/ubuntuuser/ros2_ws/install/crazyflie:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/opt/ros/jazzy'}), 'shell': False}
+[0.051510] (turtlebot3_fake_node) JobProgress: {'identifier': 'turtlebot3_fake_node', 'progress': 'cmake'}
+[0.051574] (turtlebot3_fake_node) Command: {'cmd': ['/usr/bin/cmake', '/home/ubuntuuser/ros2_ws/src/turtlebot3_simulations/turtlebot3_fake_node', '-DCMAKE_INSTALL_PREFIX=/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node'], 'cwd': '/home/ubuntuuser/ros2_ws/build/turtlebot3_fake_node', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'ubuntuuser', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'wayland', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntuuser', 'OLDPWD': '/home/ubuntuuser', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PS1': '(.venv) \\[\\e]0;\\u@\\h: \\w\\a\\]${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$', 'SYSTEMD_EXEC_PID': '2947', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntuuser', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'ubuntuuser', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'PATH': '/home/ubuntuuser/ros2_ws/.venv/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/ubuntuuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/ubuntuuserVB:@/tmp/.ICE-unix/2915,unix/ubuntuuserVB:/tmp/.ICE-unix/2915', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/51b2a895_ce38_4490_b69f_ba299d810c30', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'VIRTUAL_ENV_PROMPT': '(.venv)', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.XQG2D3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.272', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'ROS_DOMAIN_ID': '30', 'AMENT_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/turtlebot3_simulations:/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo:/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_sim:/home/ubuntuuser/ros2_ws/install/crazyflie_examples:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/home/ubuntuuser/ros2_ws/install/crazyflie:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VIRTUAL_ENV': '/home/ubuntuuser/ros2_ws/.venv', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/ubuntuuser/ros2_ws/build/turtlebot3_fake_node', 'TURTLEBOT3_MODEL': 'burger', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_sim/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_examples/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_py/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_simulations:/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo:/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node:/home/ubuntuuser/ros2_ws/install/crazyflie_sim:/home/ubuntuuser/ros2_ws/install/crazyflie_examples:/home/ubuntuuser/ros2_ws/install/crazyflie:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/opt/ros/jazzy'}), 'shell': False}
+[0.063984] (turtlebot3_gazebo) JobProgress: {'identifier': 'turtlebot3_gazebo', 'progress': 'cmake'}
+[0.069028] (turtlebot3_gazebo) Command: {'cmd': ['/usr/bin/cmake', '/home/ubuntuuser/ros2_ws/src/turtlebot3_simulations/turtlebot3_gazebo', '-DCMAKE_INSTALL_PREFIX=/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo'], 'cwd': '/home/ubuntuuser/ros2_ws/build/turtlebot3_gazebo', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'ubuntuuser', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'wayland', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntuuser', 'OLDPWD': '/home/ubuntuuser', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PS1': '(.venv) \\[\\e]0;\\u@\\h: \\w\\a\\]${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$', 'SYSTEMD_EXEC_PID': '2947', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntuuser', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'ubuntuuser', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'PATH': '/home/ubuntuuser/ros2_ws/.venv/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/ubuntuuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/ubuntuuserVB:@/tmp/.ICE-unix/2915,unix/ubuntuuserVB:/tmp/.ICE-unix/2915', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/51b2a895_ce38_4490_b69f_ba299d810c30', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'VIRTUAL_ENV_PROMPT': '(.venv)', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.XQG2D3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.272', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'ROS_DOMAIN_ID': '30', 'AMENT_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/turtlebot3_simulations:/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo:/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_sim:/home/ubuntuuser/ros2_ws/install/crazyflie_examples:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/home/ubuntuuser/ros2_ws/install/crazyflie:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VIRTUAL_ENV': '/home/ubuntuuser/ros2_ws/.venv', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/ubuntuuser/ros2_ws/build/turtlebot3_gazebo', 'TURTLEBOT3_MODEL': 'burger', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_sim/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_examples/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_py/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_simulations:/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo:/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node:/home/ubuntuuser/ros2_ws/install/crazyflie_sim:/home/ubuntuuser/ros2_ws/install/crazyflie_examples:/home/ubuntuuser/ros2_ws/install/crazyflie:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/opt/ros/jazzy'}), 'shell': False}
+[0.098857] (-) TimerEvent: {}
+[0.203086] (-) TimerEvent: {}
+[0.277182] (crazyflie_interfaces) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.303229] (-) TimerEvent: {}
+[0.306333] (turtlebot3_fake_node) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.314948] (turtlebot3_gazebo) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.403882] (-) TimerEvent: {}
+[0.495631] (turtlebot3_fake_node) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.504875] (-) TimerEvent: {}
+[0.512155] (turtlebot3_gazebo) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.516920] (crazyflie_interfaces) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.549277] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.564899] (crazyflie_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.578404] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.605063] (-) TimerEvent: {}
+[0.707632] (-) TimerEvent: {}
+[0.786145] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.802944] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.803628] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.804832] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.807857] (-) TimerEvent: {}
+[0.867864] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.879969] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.905905] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.906995] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.908046] (-) TimerEvent: {}
+[0.911272] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.941544] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.960952] (crazyflie_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.008891] (-) TimerEvent: {}
+[1.014646] (crazyflie_interfaces) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.017012] (crazyflie_interfaces) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.018992] (crazyflie_interfaces) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.053563] (crazyflie_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.111892] (-) TimerEvent: {}
+[1.212290] (-) TimerEvent: {}
+[1.313632] (-) TimerEvent: {}
+[1.418244] (-) TimerEvent: {}
+[1.427949] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.435571] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.474873] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.475099] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.475185] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.480555] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[1.488232] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.488441] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.494544] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.506412] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[1.510381] (crazyflie_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.518418] (-) TimerEvent: {}
+[1.560626] (crazyflie_interfaces) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.562297] (crazyflie_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.567617] (crazyflie_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.585840] (crazyflie_interfaces) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[1.618794] (-) TimerEvent: {}
+[1.720184] (-) TimerEvent: {}
+[1.853595] (-) TimerEvent: {}
+[1.902268] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found Python3: /home/ubuntuuser/ros2_ws/.venv/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[1.953843] (-) TimerEvent: {}
+[2.017002] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found Python3: /home/ubuntuuser/ros2_ws/.venv/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[2.054013] (-) TimerEvent: {}
+[2.157276] (-) TimerEvent: {}
+[2.240177] (crazyflie_interfaces) StdoutLine: {'line': b'-- Found Python3: /home/ubuntuuser/ros2_ws/.venv/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[2.258383] (-) TimerEvent: {}
+[2.334136] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found ros_gz_sim: 1.0.16 (/opt/ros/jazzy/share/ros_gz_sim/cmake)\n'}
+[2.358549] (-) TimerEvent: {}
+[2.390952] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)\n'}
+[2.458779] (-) TimerEvent: {}
+[2.494710] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[2.541312] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[2.558991] (-) TimerEvent: {}
+[2.604168] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.641889] (crazyflie_interfaces) StdoutLine: {'line': b'-- Found builtin_interfaces: 2.0.3 (/opt/ros/jazzy/share/builtin_interfaces/cmake)\n'}
+[2.651829] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[2.658882] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.659232] (-) TimerEvent: {}
+[2.719283] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[2.759582] (-) TimerEvent: {}
+[2.771947] (crazyflie_interfaces) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[2.801892] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.808096] (crazyflie_interfaces) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[2.854283] (crazyflie_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.859823] (-) TimerEvent: {}
+[2.877669] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[2.887596] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[2.914457] (crazyflie_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.914952] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.957357] (r7021e_exploration) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/r7021e_exploration', 'build', '--build-base', '/home/ubuntuuser/ros2_ws/build/r7021e_exploration/build', 'install', '--record', '/home/ubuntuuser/ros2_ws/build/r7021e_exploration/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/ubuntuuser/ros2_ws/src/r7021e_exploration', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'ubuntuuser', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'wayland', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntuuser', 'OLDPWD': '/home/ubuntuuser', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PS1': '(.venv) \\[\\e]0;\\u@\\h: \\w\\a\\]${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$', 'SYSTEMD_EXEC_PID': '2947', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntuuser', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'ubuntuuser', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'PATH': '/home/ubuntuuser/ros2_ws/.venv/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/ubuntuuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/ubuntuuserVB:@/tmp/.ICE-unix/2915,unix/ubuntuuserVB:/tmp/.ICE-unix/2915', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/51b2a895_ce38_4490_b69f_ba299d810c30', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'VIRTUAL_ENV_PROMPT': '(.venv)', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.XQG2D3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.272', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'ROS_DOMAIN_ID': '30', 'AMENT_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/turtlebot3_simulations:/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo:/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_sim:/home/ubuntuuser/ros2_ws/install/crazyflie_examples:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/home/ubuntuuser/ros2_ws/install/crazyflie:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VIRTUAL_ENV': '/home/ubuntuuser/ros2_ws/.venv', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/ubuntuuser/ros2_ws/build/r7021e_exploration', 'TURTLEBOT3_MODEL': 'burger', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/ubuntuuser/ros2_ws/build/r7021e_exploration/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_sim/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_examples/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_py/lib/python3.12/site-packages:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/home/ubuntuuser/ros2_ws/install/turtlebot3_simulations:/home/ubuntuuser/ros2_ws/install/turtlebot3_gazebo:/home/ubuntuuser/ros2_ws/install/turtlebot3_fake_node:/home/ubuntuuser/ros2_ws/install/crazyflie_sim:/home/ubuntuuser/ros2_ws/install/crazyflie_examples:/home/ubuntuuser/ros2_ws/install/crazyflie:/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}, 'shell': False}
+[2.962819] (-) TimerEvent: {}
+[2.981802] (crazyflie_interfaces) StdoutLine: {'line': b'-- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)\n'}
+[3.054900] (crazyflie_interfaces) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.6.0 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)\n'}
+[3.062944] (-) TimerEvent: {}
+[3.068893] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found nav_msgs: 5.3.6 (/opt/ros/jazzy/share/nav_msgs/cmake)\n'}
+[3.107222] (crazyflie_interfaces) StdoutLine: {'line': b'-- Found rosidl_adapter: 4.6.6 (/opt/ros/jazzy/share/rosidl_adapter/cmake)\n'}
+[3.163166] (-) TimerEvent: {}
+[3.191526] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found rclcpp: 28.1.11 (/opt/ros/jazzy/share/rclcpp/cmake)\n'}
+[3.224573] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[3.263468] (-) TimerEvent: {}
+[3.291908] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[3.320323] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[3.331934] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[3.345318] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[3.363741] (-) TimerEvent: {}
+[3.464342] (-) TimerEvent: {}
+[3.567832] (-) TimerEvent: {}
+[3.668292] (-) TimerEvent: {}
+[3.789904] (-) TimerEvent: {}
+[3.814028] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[3.872029] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[3.890095] (-) TimerEvent: {}
+[3.895488] (turtlebot3_fake_node) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[3.905998] (r7021e_exploration) StdoutLine: {'line': b'running egg_info\n'}
+[3.906377] (r7021e_exploration) StdoutLine: {'line': b'creating ../../build/r7021e_exploration/r7021e_exploration.egg-info\n'}
+[3.990271] (-) TimerEvent: {}
+[4.033448] (r7021e_exploration) StdoutLine: {'line': b'writing ../../build/r7021e_exploration/r7021e_exploration.egg-info/PKG-INFO\n'}
+[4.038408] (r7021e_exploration) StdoutLine: {'line': b'writing dependency_links to ../../build/r7021e_exploration/r7021e_exploration.egg-info/dependency_links.txt\n'}
+[4.038610] (r7021e_exploration) StdoutLine: {'line': b'writing entry points to ../../build/r7021e_exploration/r7021e_exploration.egg-info/entry_points.txt\n'}
+[4.038699] (r7021e_exploration) StdoutLine: {'line': b'writing requirements to ../../build/r7021e_exploration/r7021e_exploration.egg-info/requires.txt\n'}
+[4.038885] (r7021e_exploration) StdoutLine: {'line': b'writing top-level names to ../../build/r7021e_exploration/r7021e_exploration.egg-info/top_level.txt\n'}
+[4.038985] (r7021e_exploration) StdoutLine: {'line': b"writing manifest file '../../build/r7021e_exploration/r7021e_exploration.egg-info/SOURCES.txt'\n"}
+[4.090517] (-) TimerEvent: {}
+[4.116558] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found sensor_msgs: 5.3.6 (/opt/ros/jazzy/share/sensor_msgs/cmake)\n'}
+[4.149610] (r7021e_exploration) StdoutLine: {'line': b"reading manifest file '../../build/r7021e_exploration/r7021e_exploration.egg-info/SOURCES.txt'\n"}
+[4.151340] (r7021e_exploration) StdoutLine: {'line': b"writing manifest file '../../build/r7021e_exploration/r7021e_exploration.egg-info/SOURCES.txt'\n"}
+[4.151534] (r7021e_exploration) StdoutLine: {'line': b'running build\n'}
+[4.151665] (r7021e_exploration) StdoutLine: {'line': b'running build_py\n'}
+[4.151963] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build\n'}
+[4.152160] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib\n'}
+[4.152916] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration\n'}
+[4.153074] (r7021e_exploration) StdoutLine: {'line': b'copying r7021e_exploration/frontier_detector_node.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration\n'}
+[4.153204] (r7021e_exploration) StdoutLine: {'line': b'copying r7021e_exploration/__init__.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration\n'}
+[4.154935] (r7021e_exploration) StdoutLine: {'line': b'copying r7021e_exploration/navigation_node.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration\n'}
+[4.155159] (r7021e_exploration) StdoutLine: {'line': b'copying r7021e_exploration/rrt.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration\n'}
+[4.155262] (r7021e_exploration) StdoutLine: {'line': b'copying r7021e_exploration/path_follower_node.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration\n'}
+[4.155344] (r7021e_exploration) StdoutLine: {'line': b'running install\n'}
+[4.163960] (r7021e_exploration) StdoutLine: {'line': b'running install_lib\n'}
+[4.188908] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found nav_msgs: 5.3.6 (/opt/ros/jazzy/share/nav_msgs/cmake)\n'}
+[4.191993] (-) TimerEvent: {}
+[4.205065] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration\n'}
+[4.205331] (r7021e_exploration) StdoutLine: {'line': b'copying /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration/frontier_detector_node.py -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration\n'}
+[4.205428] (r7021e_exploration) StdoutLine: {'line': b'copying /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration/__init__.py -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration\n'}
+[4.205511] (r7021e_exploration) StdoutLine: {'line': b'copying /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration/navigation_node.py -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration\n'}
+[4.205590] (r7021e_exploration) StdoutLine: {'line': b'copying /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration/rrt.py -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration\n'}
+[4.205878] (r7021e_exploration) StdoutLine: {'line': b'copying /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration/path_follower_node.py -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration\n'}
+[4.206069] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found tf2: 0.36.14 (/opt/ros/jazzy/share/tf2/cmake)\n'}
+[4.206309] (r7021e_exploration) StdoutLine: {'line': b'byte-compiling /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/frontier_detector_node.py to frontier_detector_node.cpython-312.pyc\n'}
+[4.207629] (r7021e_exploration) StdoutLine: {'line': b'byte-compiling /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/__init__.py to __init__.cpython-312.pyc\n'}
+[4.207956] (r7021e_exploration) StdoutLine: {'line': b'byte-compiling /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/navigation_node.py to navigation_node.cpython-312.pyc\n'}
+[4.213572] (r7021e_exploration) StdoutLine: {'line': b'byte-compiling /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/rrt.py to rrt.cpython-312.pyc\n'}
+[4.217332] (r7021e_exploration) StdoutLine: {'line': b'byte-compiling /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/path_follower_node.py to path_follower_node.cpython-312.pyc\n'}
+[4.219461] (r7021e_exploration) StdoutLine: {'line': b'running install_data\n'}
+[4.220222] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/ament_index\n'}
+[4.220551] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/ament_index/resource_index\n'}
+[4.221191] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/ament_index/resource_index/packages\n'}
+[4.223076] (r7021e_exploration) StdoutLine: {'line': b'copying resource/r7021e_exploration -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/ament_index/resource_index/packages\n'}
+[4.223281] (r7021e_exploration) StdoutLine: {'line': b'copying package.xml -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration\n'}
+[4.223432] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration/launch\n'}
+[4.223592] (r7021e_exploration) StdoutLine: {'line': b'copying launch/exploration.launch.py -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration/launch\n'}
+[4.223732] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration/launch/rviz\n'}
+[4.224023] (r7021e_exploration) StdoutLine: {'line': b'copying launch/rviz/exploration.rviz -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration/launch/rviz\n'}
+[4.224137] (r7021e_exploration) StdoutLine: {'line': b'creating /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration/config\n'}
+[4.224224] (r7021e_exploration) StdoutLine: {'line': b'copying config/slam_config.yaml -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration/config\n'}
+[4.224306] (r7021e_exploration) StdoutLine: {'line': b'running install_egg_info\n'}
+[4.233058] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found tf2_msgs: 0.36.14 (/opt/ros/jazzy/share/tf2_msgs/cmake)\n'}
+[4.260311] (r7021e_exploration) StdoutLine: {'line': b'Copying ../../build/r7021e_exploration/r7021e_exploration.egg-info to /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration-0.0.0-py3.12.egg-info\n'}
+[4.262861] (r7021e_exploration) StdoutLine: {'line': b'running install_scripts\n'}
+[4.270914] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found sensor_msgs: 5.3.6 (/opt/ros/jazzy/share/sensor_msgs/cmake)\n'}
+[4.292203] (-) TimerEvent: {}
+[4.359514] (crazyflie_interfaces) StderrLine: {'line': b'Traceback (most recent call last):\n'}
+[4.359861] (crazyflie_interfaces) StderrLine: {'line': b'  File "/opt/ros/jazzy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>\n'}
+[4.360230] (crazyflie_interfaces) StderrLine: {'line': b'    from catkin_pkg.package import parse_package_string\n'}
+[4.360486] (crazyflie_interfaces) StderrLine: {'line': b"ModuleNotFoundError: No module named 'catkin_pkg'\n"}
+[4.367639] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found gz_math_vendor: 0.0.8 (/opt/ros/jazzy/share/gz_math_vendor/cmake)\n'}
+[4.368413] (crazyflie_interfaces) StderrLine: {'line': b'\x1b[31mCMake Error at /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):\n'}
+[4.368691] (crazyflie_interfaces) StderrLine: {'line': b'  execute_process(/home/ubuntuuser/ros2_ws/.venv/bin/python3\n'}
+[4.368995] (crazyflie_interfaces) StderrLine: {'line': b'  /opt/ros/jazzy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py\n'}
+[4.369276] (crazyflie_interfaces) StderrLine: {'line': b'  /home/ubuntuuser/ros2_ws/src/crazyswarm2/crazyflie_interfaces/package.xml\n'}
+[4.370220] (crazyflie_interfaces) StderrLine: {'line': b'  /home/ubuntuuser/ros2_ws/build/crazyflie_interfaces/ament_cmake_core/package.cmake)\n'}
+[4.370475] (crazyflie_interfaces) StderrLine: {'line': b'  returned error code 1\n'}
+[4.370986] (crazyflie_interfaces) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[4.371100] (crazyflie_interfaces) StderrLine: {'line': b'  /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)\n'}
+[4.371183] (crazyflie_interfaces) StderrLine: {'line': b'  /opt/ros/jazzy/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:220 (ament_package_xml)\n'}
+[4.371259] (crazyflie_interfaces) StderrLine: {'line': b'  CMakeLists.txt:20 (rosidl_generate_interfaces)\n'}
+[4.371331] (crazyflie_interfaces) StderrLine: {'line': b'\n'}
+[4.371403] (crazyflie_interfaces) StderrLine: {'line': b'\x1b[0m\n'}
+[4.372882] (crazyflie_interfaces) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[4.389928] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[4.392493] (-) TimerEvent: {}
+[4.404212] (crazyflie_interfaces) CommandEnded: {'returncode': 1}
+[4.406260] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7\n'}
+[4.410193] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.411050] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2\n'}
+[4.420949] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found gz_sim_vendor: 0.0.8 (/opt/ros/jazzy/share/gz_sim_vendor/cmake)\n'}
+[4.441599] (crazyflie_interfaces) JobEnded: {'identifier': 'crazyflie_interfaces', 'rc': 1}
+[4.475493] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Found turtlebot3_msgs: 2.4.0 (/opt/ros/jazzy/share/turtlebot3_msgs/cmake)\n'}
+[4.492736] (-) TimerEvent: {}
+[4.527730] (r7021e_exploration) StdoutLine: {'line': b'Installing frontier_detector_node script to /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/r7021e_exploration\n'}
+[4.528934] (r7021e_exploration) StdoutLine: {'line': b'Installing navigation_node script to /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/r7021e_exploration\n'}
+[4.529218] (r7021e_exploration) StdoutLine: {'line': b'Installing path_follower_node script to /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/r7021e_exploration\n'}
+[4.529841] (r7021e_exploration) StdoutLine: {'line': b"writing list of installed files to '/home/ubuntuuser/ros2_ws/build/r7021e_exploration/install.log'\n"}
+[4.550961] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sim8 -- found version 8.9.0\n'}
+[4.551265] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sim8\n'}
+[4.554029] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.8.0\n'}
+[4.554259] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of sdformat14\n'}
+[4.564585] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'tinyxml2'\n"}
+[4.593914] (-) TimerEvent: {}
+[4.599040] (r7021e_exploration) JobEnded: {'identifier': 'r7021e_exploration', 'rc': 'SIGINT'}
+[4.624460] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found tinyxml2, version 10.0.0\n'}
+[4.631649] (turtlebot3_fake_node) StderrLine: {'line': b'Traceback (most recent call last):\n'}
+[4.632125] (turtlebot3_fake_node) StderrLine: {'line': b'  File "/opt/ros/jazzy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>\n'}
+[4.632226] (turtlebot3_fake_node) StderrLine: {'line': b'    from catkin_pkg.package import parse_package_string\n'}
+[4.632325] (turtlebot3_fake_node) StderrLine: {'line': b"ModuleNotFoundError: No module named 'catkin_pkg'\n"}
+[4.637666] (turtlebot3_fake_node) StderrLine: {'line': b'\x1b[31mCMake Error at /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):\n'}
+[4.637996] (turtlebot3_fake_node) StderrLine: {'line': b'  execute_process(/home/ubuntuuser/ros2_ws/.venv/bin/python3\n'}
+[4.638090] (turtlebot3_fake_node) StderrLine: {'line': b'  /opt/ros/jazzy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py\n'}
+[4.638173] (turtlebot3_fake_node) StderrLine: {'line': b'  /home/ubuntuuser/ros2_ws/src/turtlebot3_simulations/turtlebot3_fake_node/package.xml\n'}
+[4.638368] (turtlebot3_fake_node) StderrLine: {'line': b'  /home/ubuntuuser/ros2_ws/build/turtlebot3_fake_node/ament_cmake_core/package.cmake)\n'}
+[4.638451] (turtlebot3_fake_node) StderrLine: {'line': b'  returned error code 1\n'}
+[4.638528] (turtlebot3_fake_node) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[4.638615] (turtlebot3_fake_node) StderrLine: {'line': b'  /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)\n'}
+[4.638791] (turtlebot3_fake_node) StderrLine: {'line': b'  /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)\n'}
+[4.638944] (turtlebot3_fake_node) StderrLine: {'line': b'  CMakeLists.txt:75 (ament_package)\n'}
+[4.639039] (turtlebot3_fake_node) StderrLine: {'line': b'\n'}
+[4.639119] (turtlebot3_fake_node) StderrLine: {'line': b'\x1b[0m\n'}
+[4.639196] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[4.657445] (turtlebot3_fake_node) JobEnded: {'identifier': 'turtlebot3_fake_node', 'rc': 'SIGINT'}
+[4.694084] (-) TimerEvent: {}
+[4.713532] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[4.714046] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.714470] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2\n'}
+[4.714946] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-utils2> component [cli]\n'}
+[4.719493] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2-cli -- found version 2.2.1\n'}
+[4.719854] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2-cli\n'}
+[4.725285] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[4.725686] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2\n'}
+[4.726373] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.727034] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [loader]\n'}
+[4.731087] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2-loader -- found version 2.0.4\n'}
+[4.731625] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2-loader\n'}
+[4.732075] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [register]\n'}
+[4.735894] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2-register -- found version 2.0.4\n'}
+[4.736160] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2-register\n'}
+[4.740509] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.4.1\n'}
+[4.740866] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13\n'}
+[4.794353] (-) TimerEvent: {}
+[4.894837] (-) TimerEvent: {}
+[4.977310] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.21.12") \n'}
+[4.995134] (-) TimerEvent: {}
+[5.011638] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Config-file not installed for ZeroMQ -- checking for pkg-config\n'}
+[5.024446] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libzmq >= 4'\n"}
+[5.063674] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libzmq, version 4.3.5\n'}
+[5.095305] (-) TimerEvent: {}
+[5.155174] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found ZeroMQ: TRUE (Required is at least version "4") \n'}
+[5.166185] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'uuid'\n"}
+[5.195556] (-) TimerEvent: {}
+[5.197677] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found uuid, version 2.39.3\n'}
+[5.289516] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found UUID: TRUE  \n'}
+[5.290260] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[5.295745] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[5.295949] (-) TimerEvent: {}
+[5.296066] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-msgs10\n'}
+[5.337526] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[5.339949] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[5.355446] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-transport13> component [log]\n'}
+[5.359404] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-transport13-log -- found version 13.4.1\n'}
+[5.360210] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13-log\n'}
+[5.360816] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-transport13> component [parameters]\n'}
+[5.365777] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-transport13-parameters -- found version 13.4.1\n'}
+[5.366130] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13-parameters\n'}
+[5.367660] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[5.372451] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[5.373033] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[5.373180] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[5.374121] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[5.377029] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[5.378927] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found DL: TRUE  \n'}
+[5.392565] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [av]\n'}
+[5.396300] (-) TimerEvent: {}
+[5.398917] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-av -- found version 5.7.1\n'}
+[5.399887] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-av\n'}
+[5.409879] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libswscale'\n"}
+[5.449423] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libswscale, version 7.5.100\n'}
+[5.496584] (-) TimerEvent: {}
+[5.552118] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found SWSCALE: TRUE  \n'}
+[5.563205] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libavdevice >= 56.4.100'\n"}
+[5.597159] (-) TimerEvent: {}
+[5.606949] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libavdevice, version 60.3.100\n'}
+[5.697427] (-) TimerEvent: {}
+[5.709786] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found AVDEVICE: TRUE (Required is at least version "56.4.100") \n'}
+[5.719116] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libavformat'\n"}
+[5.759323] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libavformat, version 60.16.100\n'}
+[5.797668] (-) TimerEvent: {}
+[5.850888] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found AVFORMAT: TRUE  \n'}
+[5.860548] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libavcodec'\n"}
+[5.897895] (-) TimerEvent: {}
+[5.898741] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libavcodec, version 60.31.102\n'}
+[5.988101] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found AVCODEC: TRUE  \n'}
+[5.997887] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libavutil'\n"}
+[5.998119] (-) TimerEvent: {}
+[6.033156] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libavutil, version 58.29.100\n'}
+[6.098375] (-) TimerEvent: {}
+[6.115987] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found AVUTIL: TRUE  \n'}
+[6.116517] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [events]\n'}
+[6.121828] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-events -- found version 5.7.1\n'}
+[6.122141] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-events\n'}
+[6.122661] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[6.123972] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [graphics]\n'}
+[6.128632] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-graphics -- found version 5.7.1\n'}
+[6.129249] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-graphics\n'}
+[6.129883] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[6.139977] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found GzAssimp: TRUE (found version "5.3.0") \n'}
+[6.141335] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [io]\n'}
+[6.146765] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-io -- found version 5.7.1\n'}
+[6.146969] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-io\n'}
+[6.147860] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [profiler]\n'}
+[6.152586] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-profiler -- found version 5.7.1\n'}
+[6.153230] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-profiler\n'}
+[6.162890] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-fuel_tools9 -- found version 9.1.1\n'}
+[6.163468] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-fuel_tools9\n'}
+[6.198889] (-) TimerEvent: {}
+[6.299414] (-) TimerEvent: {}
+[6.378144] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "8.5.0")  \n'}
+[6.398872] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'jsoncpp'\n"}
+[6.399552] (-) TimerEvent: {}
+[6.447762] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found jsoncpp, version 1.9.5\n'}
+[6.499749] (-) TimerEvent: {}
+[6.531998] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found JSONCPP: TRUE  \n'}
+[6.560669] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'yaml-0.1'\n"}
+[6.593852] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found yaml-0.1, version 0.2.5\n'}
+[6.599972] (-) TimerEvent: {}
+[6.677142] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found YAML: TRUE  \n'}
+[6.688962] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libzip'\n"}
+[6.700167] (-) TimerEvent: {}
+[6.730865] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libzip, version 1.7.3\n'}
+[6.800477] (-) TimerEvent: {}
+[6.816604] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found ZIP: TRUE  \n'}
+[6.817417] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[6.818152] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[6.818904] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[6.820003] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[6.820200] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[6.820288] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[6.833911] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [testing]\n'}
+[6.838446] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-testing -- found version 5.7.1\n'}
+[6.838729] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-testing\n'}
+[6.840169] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[6.840754] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[6.845503] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-gui8 -- found version 8.4.0\n'}
+[6.846218] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-gui8\n'}
+[6.888777] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[6.889269] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[6.889777] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[6.890535] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[6.891471] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.4.1\n'}
+[6.895880] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.2\n'}
+[6.896437] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-rendering8\n'}
+[6.896934] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[6.897274] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7\n'}
+[6.897775] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[6.897983] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-math7> component [eigen3]\n'}
+[6.900803] (-) TimerEvent: {}
+[6.903387] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7-eigen3 -- found version 7.5.2\n'}
+[6.903613] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7-eigen3\n'}
+[6.921877] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[6.922288] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[6.924103] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[6.924291] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[6.924384] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[6.937365] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [graphics]\n'}
+[6.937574] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [events]\n'}
+[6.937659] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [geospatial]\n'}
+[6.941917] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-geospatial -- found version 5.7.1\n'}
+[6.942265] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-geospatial\n'}
+[6.943068] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[6.943712] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[6.945382] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[6.946093] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2\n'}
+[6.946255] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[6.946510] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [all]\n'}
+[6.950303] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for all libraries of gz-plugin2 -- found version 2.0.4\n'}
+[6.951185] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[6.952501] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[6.978075] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so  found components: OpenGL \n'}
+[6.980781] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[7.001084] (-) TimerEvent: {}
+[7.027636] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-physics7 -- found version 7.5.0\n'}
+[7.027996] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7\n'}
+[7.028376] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[7.029008] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[7.029720] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[7.030400] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[7.032092] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [heightmap]\n'}
+[7.035483] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-physics7-heightmap -- found version 7.5.0\n'}
+[7.035891] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-heightmap\n'}
+[7.036389] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[7.036859] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [mesh]\n'}
+[7.040269] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-physics7-mesh -- found version 7.5.0\n'}
+[7.040685] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-mesh\n'}
+[7.040997] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[7.041706] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [sdf]\n'}
+[7.046060] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-physics7-sdf -- found version 7.5.0\n'}
+[7.046506] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-sdf\n'}
+[7.047492] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.8.0\n'}
+[7.053473] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[7.054003] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8\n'}
+[7.090567] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[7.091242] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[7.091994] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.4.1\n'}
+[7.092584] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.2\n'}
+[7.093211] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[7.093829] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.8.0\n'}
+[7.094880] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [air_pressure]\n'}
+[7.098133] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-air_pressure -- found version 8.2.2\n'}
+[7.098342] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-air_pressure\n'}
+[7.099336] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [air_speed]\n'}
+[7.101226] (-) TimerEvent: {}
+[7.102317] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-air_speed -- found version 8.2.2\n'}
+[7.102888] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-air_speed\n'}
+[7.103487] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [altimeter]\n'}
+[7.108943] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-altimeter -- found version 8.2.2\n'}
+[7.109233] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-altimeter\n'}
+[7.110447] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [imu]\n'}
+[7.112223] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-imu -- found version 8.2.2\n'}
+[7.112482] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-imu\n'}
+[7.113269] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [force_torque]\n'}
+[7.116347] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-force_torque -- found version 8.2.2\n'}
+[7.116858] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-force_torque\n'}
+[7.117278] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [logical_camera]\n'}
+[7.120578] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-logical_camera -- found version 8.2.2\n'}
+[7.120887] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-logical_camera\n'}
+[7.121411] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [magnetometer]\n'}
+[7.124758] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-magnetometer -- found version 8.2.2\n'}
+[7.125515] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-magnetometer\n'}
+[7.126983] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [navsat]\n'}
+[7.129328] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-navsat -- found version 8.2.2\n'}
+[7.129912] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-navsat\n'}
+[7.130413] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [dvl]\n'}
+[7.133787] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-dvl -- found version 8.2.2\n'}
+[7.134052] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-dvl\n'}
+[7.134588] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[7.135322] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8\n'}
+[7.168273] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[7.168967] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[7.169573] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.4.1\n'}
+[7.170165] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.2\n'}
+[7.170873] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[7.171364] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.8.0\n'}
+[7.171782] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rendering]\n'}
+[7.174949] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-rendering -- found version 8.2.2\n'}
+[7.175310] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-rendering\n'}
+[7.177159] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rendering]\n'}
+[7.177355] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [lidar]\n'}
+[7.180291] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-lidar -- found version 8.2.2\n'}
+[7.180839] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-lidar\n'}
+[7.181266] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[7.182256] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [gpu_lidar]\n'}
+[7.185567] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-gpu_lidar -- found version 8.2.2\n'}
+[7.186470] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-gpu_lidar\n'}
+[7.186637] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[7.187431] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [camera]\n'}
+[7.190346] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-camera -- found version 8.2.2\n'}
+[7.190877] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-camera\n'}
+[7.191427] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[7.192173] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [boundingbox_camera]\n'}
+[7.195363] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-boundingbox_camera -- found version 8.2.2\n'}
+[7.195629] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-boundingbox_camera\n'}
+[7.196416] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [segmentation_camera]\n'}
+[7.199459] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-segmentation_camera -- found version 8.2.2\n'}
+[7.199762] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-segmentation_camera\n'}
+[7.200574] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [depth_camera]\n'}
+[7.201403] (-) TimerEvent: {}
+[7.204585] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-depth_camera -- found version 8.2.2\n'}
+[7.205256] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-depth_camera\n'}
+[7.205479] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[7.206731] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rgbd_camera]\n'}
+[7.210047] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-rgbd_camera -- found version 8.2.2\n'}
+[7.211494] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-rgbd_camera\n'}
+[7.211763] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[7.212226] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [thermal_camera]\n'}
+[7.215384] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-thermal_camera -- found version 8.2.2\n'}
+[7.215571] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-thermal_camera\n'}
+[7.215932] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[7.217087] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [wide_angle_camera]\n'}
+[7.220026] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-sensors8-wide_angle_camera -- found version 8.2.2\n'}
+[7.220435] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-wide_angle_camera\n'}
+[7.221812] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.2\n'}
+[7.222469] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[7.223150] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[7.258957] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[7.294377] (turtlebot3_gazebo) StderrLine: {'line': b'Traceback (most recent call last):\n'}
+[7.294613] (turtlebot3_gazebo) StderrLine: {'line': b'  File "/opt/ros/jazzy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>\n'}
+[7.294862] (turtlebot3_gazebo) StderrLine: {'line': b'    from catkin_pkg.package import parse_package_string\n'}
+[7.294965] (turtlebot3_gazebo) StderrLine: {'line': b"ModuleNotFoundError: No module named 'catkin_pkg'\n"}
+[7.300353] (turtlebot3_gazebo) StderrLine: {'line': b'\x1b[31mCMake Error at /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):\n'}
+[7.300562] (turtlebot3_gazebo) StderrLine: {'line': b'  execute_process(/home/ubuntuuser/ros2_ws/.venv/bin/python3\n'}
+[7.300647] (turtlebot3_gazebo) StderrLine: {'line': b'  /opt/ros/jazzy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py\n'}
+[7.300784] (turtlebot3_gazebo) StderrLine: {'line': b'  /home/ubuntuuser/ros2_ws/src/turtlebot3_simulations/turtlebot3_gazebo/package.xml\n'}
+[7.300951] (turtlebot3_gazebo) StderrLine: {'line': b'  /home/ubuntuuser/ros2_ws/build/turtlebot3_gazebo/ament_cmake_core/package.cmake)\n'}
+[7.301193] (turtlebot3_gazebo) StderrLine: {'line': b'  returned error code 1\n'}
+[7.301280] (turtlebot3_gazebo) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[7.301356] (turtlebot3_gazebo) StderrLine: {'line': b'  /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)\n'}
+[7.301453] (-) TimerEvent: {}
+[7.301552] (turtlebot3_gazebo) StderrLine: {'line': b'  /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)\n'}
+[7.301645] (turtlebot3_gazebo) StderrLine: {'line': b'  CMakeLists.txt:108 (ament_package)\n'}
+[7.301790] (turtlebot3_gazebo) StderrLine: {'line': b'\n'}
+[7.301876] (turtlebot3_gazebo) StderrLine: {'line': b'\x1b[0m\n'}
+[7.301950] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[7.331483] (turtlebot3_gazebo) JobEnded: {'identifier': 'turtlebot3_gazebo', 'rc': 'SIGINT'}
+[7.334757] (turtlebot3_trailer) JobSkipped: {'identifier': 'turtlebot3_trailer'}
+[7.334911] (crazyflie) JobSkipped: {'identifier': 'crazyflie'}
+[7.334934] (crazyflie_py) JobSkipped: {'identifier': 'crazyflie_py'}
+[7.334950] (crazyflie_sim) JobSkipped: {'identifier': 'crazyflie_sim'}
+[7.334965] (turtlebot3_simulations) JobSkipped: {'identifier': 'turtlebot3_simulations'}
+[7.334978] (crazyflie_examples) JobSkipped: {'identifier': 'crazyflie_examples'}
+[7.334993] (-) EventReactorShutdown: {}

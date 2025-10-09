@@ -1,0 +1,53 @@
+[3.931s] Invoking command in '/home/ubuntuuser/ros2_ws/src/r7021e_exploration': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(.venv) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/r7021e_exploration build --build-base /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build install --record /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/install.log --single-version-externally-managed install_data
+[5.640s] running egg_info
+[5.642s] creating ../build/r7021e_exploration/r7021e_exploration.egg-info
+[5.809s] writing ../build/r7021e_exploration/r7021e_exploration.egg-info/PKG-INFO
+[5.819s] writing dependency_links to ../build/r7021e_exploration/r7021e_exploration.egg-info/dependency_links.txt
+[5.819s] writing entry points to ../build/r7021e_exploration/r7021e_exploration.egg-info/entry_points.txt
+[5.819s] writing requirements to ../build/r7021e_exploration/r7021e_exploration.egg-info/requires.txt
+[5.819s] writing top-level names to ../build/r7021e_exploration/r7021e_exploration.egg-info/top_level.txt
+[5.819s] writing manifest file '../build/r7021e_exploration/r7021e_exploration.egg-info/SOURCES.txt'
+[6.107s] reading manifest file '../build/r7021e_exploration/r7021e_exploration.egg-info/SOURCES.txt'
+[6.110s] writing manifest file '../build/r7021e_exploration/r7021e_exploration.egg-info/SOURCES.txt'
+[6.110s] running build
+[6.111s] running build_py
+[6.111s] creating /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build
+[6.112s] creating /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib
+[6.113s] creating /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration
+[6.114s] copying r7021e_exploration/frontier_detector_node.py -> /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration
+[6.114s] copying r7021e_exploration/__init__.py -> /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration
+[6.115s] copying r7021e_exploration/navigation_node.py -> /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration
+[6.116s] copying r7021e_exploration/rrt.py -> /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration
+[6.116s] copying r7021e_exploration/path_follower_node.py -> /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration
+[6.117s] running install
+[6.127s] running install_lib
+[6.251s] creating /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration
+[6.252s] copying /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration/frontier_detector_node.py -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration
+[6.253s] copying /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration/__init__.py -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration
+[6.254s] copying /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration/navigation_node.py -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration
+[6.254s] copying /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration/rrt.py -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration
+[6.255s] copying /home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/build/lib/r7021e_exploration/path_follower_node.py -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration
+[6.256s] byte-compiling /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/frontier_detector_node.py to frontier_detector_node.cpython-312.pyc
+[6.259s] byte-compiling /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/__init__.py to __init__.cpython-312.pyc
+[6.259s] byte-compiling /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/navigation_node.py to navigation_node.cpython-312.pyc
+[6.264s] byte-compiling /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/rrt.py to rrt.cpython-312.pyc
+[6.269s] byte-compiling /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration/path_follower_node.py to path_follower_node.cpython-312.pyc
+[6.272s] running install_data
+[6.272s] creating /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/ament_index
+[6.273s] creating /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/ament_index/resource_index
+[6.273s] creating /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/ament_index/resource_index/packages
+[6.273s] copying resource/r7021e_exploration -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/ament_index/resource_index/packages
+[6.274s] copying package.xml -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/r7021e_exploration
+[6.274s] creating /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/r7021e_exploration/launch
+[6.275s] copying launch/exploration.launch.py -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/r7021e_exploration/launch
+[6.275s] creating /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/r7021e_exploration/launch/rviz
+[6.276s] copying launch/rviz/exploration.rviz -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/r7021e_exploration/launch/rviz
+[6.279s] creating /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/r7021e_exploration/config
+[6.280s] copying config/slam_config.yaml -> /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/share/r7021e_exploration/config
+[6.286s] running install_egg_info
+[6.387s] Copying ../build/r7021e_exploration/r7021e_exploration.egg-info to /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration-0.0.0-py3.12.egg-info
+[6.389s] running install_scripts
+[6.755s] Installing frontier_detector_node script to /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/r7021e_exploration
+[6.755s] Installing navigation_node script to /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/r7021e_exploration
+[6.756s] Installing path_follower_node script to /home/ubuntuuser/ros2_ws/src/install/r7021e_exploration/lib/r7021e_exploration
+[6.757s] writing list of installed files to '/home/ubuntuuser/ros2_ws/src/build/r7021e_exploration/install.log'

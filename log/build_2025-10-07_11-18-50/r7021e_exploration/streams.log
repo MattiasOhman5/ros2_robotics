@@ -1,0 +1,31 @@
+[3.432s] Invoking command in '/home/ubuntuuser/ros2_ws/src/r7021e_exploration': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/ubuntuuser/ros2_ws/build/r7021e_exploration/prefix_override:/home/ubuntuuser/ros2_ws/.venv/lib/python3.12/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(.venv) /home/ubuntuuser/ros2_ws/.venv/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/r7021e_exploration build --build-base /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build install --record /home/ubuntuuser/ros2_ws/build/r7021e_exploration/install.log --single-version-externally-managed install_data
+[4.040s] /home/ubuntuuser/ros2_ws/.venv/lib/python3.12/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+[4.041s]   warnings.warn(msg)
+[4.404s] running egg_info
+[4.470s] writing ../../build/r7021e_exploration/r7021e_exploration.egg-info/PKG-INFO
+[4.471s] writing dependency_links to ../../build/r7021e_exploration/r7021e_exploration.egg-info/dependency_links.txt
+[4.472s] writing entry points to ../../build/r7021e_exploration/r7021e_exploration.egg-info/entry_points.txt
+[4.473s] writing requirements to ../../build/r7021e_exploration/r7021e_exploration.egg-info/requires.txt
+[4.474s] writing top-level names to ../../build/r7021e_exploration/r7021e_exploration.egg-info/top_level.txt
+[4.638s] reading manifest file '../../build/r7021e_exploration/r7021e_exploration.egg-info/SOURCES.txt'
+[4.646s] writing manifest file '../../build/r7021e_exploration/r7021e_exploration.egg-info/SOURCES.txt'
+[4.647s] running build
+[4.647s] running build_py
+[4.648s] copying r7021e_exploration/frontier_detector_node.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration
+[4.649s] copying r7021e_exploration/navigation_node.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration
+[4.649s] copying r7021e_exploration/rrt.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration
+[4.649s] copying r7021e_exploration/path_follower_node.py -> /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build/lib/r7021e_exploration
+[4.651s] running install
+[4.669s] running install_lib
+[4.749s] running install_data
+[4.749s] copying package.xml -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration
+[4.752s] copying launch/exploration.launch.py -> /home/ubuntuuser/ros2_ws/install/r7021e_exploration/share/r7021e_exploration/launch
+[4.753s] running install_egg_info
+[4.858s] removing '/home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration-0.0.0-py3.12.egg-info' (and everything under it)
+[4.863s] Copying ../../build/r7021e_exploration/r7021e_exploration.egg-info to /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages/r7021e_exploration-0.0.0-py3.12.egg-info
+[4.865s] running install_scripts
+[5.248s] Installing frontier_detector_node script to /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/r7021e_exploration
+[5.249s] Installing navigation_node script to /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/r7021e_exploration
+[5.249s] Installing path_follower_node script to /home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/r7021e_exploration
+[5.249s] writing list of installed files to '/home/ubuntuuser/ros2_ws/build/r7021e_exploration/install.log'
+[5.660s] Invoked command in '/home/ubuntuuser/ros2_ws/src/r7021e_exploration' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/ubuntuuser/ros2_ws/build/r7021e_exploration/prefix_override:/home/ubuntuuser/ros2_ws/.venv/lib/python3.12/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntuuser/ros2_ws/install/r7021e_exploration/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(.venv) /home/ubuntuuser/ros2_ws/.venv/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/r7021e_exploration build --build-base /home/ubuntuuser/ros2_ws/build/r7021e_exploration/build install --record /home/ubuntuuser/ros2_ws/build/r7021e_exploration/install.log --single-version-externally-managed install_data

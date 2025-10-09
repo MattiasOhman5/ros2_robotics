@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="square_frame">
+
+  <!-- Material -->
+  <material name="red">
+    <color rgba="0.9 0.2 0.2 1"/>
+  </material>
+
+  <!-- Properties for reuse -->
+  <xacro:property name="length" value="5.0"/>
+  <xacro:property name="height" value="0.3"/>
+  <xacro:property name="width"  value="0.2"/>
+
+  <!-- Bottom Box -->
+  <link name="bottom_box">
+    <visual>
+      <geometry>
+        <box size="${length} ${width} ${height}"/>
+      </geometry>
+      <material name="gray"/>
+      <origin xyz="0 0 ${height/2}"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${length} ${width} ${height}"/>
+      </geometry>
+      <origin xyz="0 0 ${height/2}"/>
+    </collision>
+    <inertial>
+      <mass value="5"/>
+      <inertia ixx="0.1" iyy="0.1" izz="0.1" ixy="0" ixz="0" iyz="0"/>
+      <origin xyz="0 0 ${height/2}"/>
+    </inertial>
+  </link>
+
+  <!-- Top Box -->
+  <link name="top_box">
+    <visual>
+      <geometry>
+        <box size="${length} ${width} ${height}"/>
+      </geometry>
+      <material name="gray"/>
+      <origin xyz="0 0 ${height/2}"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${length} ${width} ${height}"/>
+      </geometry>
+      <origin xyz="0 0 ${height/2}"/>
+    </collision>
+    <inertial>
+      <mass value="5"/>
+      <inertia ixx="0.1" iyy="0.1" izz="0.1" ixy="0" ixz="0" iyz="0"/>
+      <origin xyz="0 0 ${height/2}"/>
+    </inertial>
+  </link>
+
+  <!-- Left Box -->
+  <link name="left_box">
+    <visual>
+      <geometry>
+        <box size="${width} ${length} ${height}"/>
+      </geometry>
+      <material name="gray"/>
+      <origin xyz="0 0 ${height/2}"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${width} ${length} ${height}"/>
+      </geometry>
+      <origin xyz="0 0 ${height/2}"/>
+    </collision>
+    <inertial>
+      <mass value="5"/>
+      <inertia ixx="0.1" iyy="0.1" izz="0.1" ixy="0" ixz="0" iyz="0"/>
+      <origin xyz="0 0 ${height/2}"/>
+    </inertial>
+  </link>
+
+  <!-- Right Box -->
+  <link name="right_box">
+    <visual>
+      <geometry>
+        <box size="${width} ${length} ${height}"/>
+      </geometry>
+      <material name="gray"/>
+      <origin xyz="0 0 ${height/2}"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${width} ${length} ${height}"/>
+      </geometry>
+      <origin xyz="0 0 ${height/2}"/>
+    </collision>
+    <inertial>
+      <mass value="5"/>
+      <inertia ixx="0.1" iyy="0.1" izz="0.1" ixy="0" ixz="0" iyz="0"/>
+      <origin xyz="0 0 ${height/2}"/>
+    </inertial>
+  </link>
+
+  <!-- Joints -->
+  <!-- Bottom is the base -->
+  <joint name="top_joint" type="fixed">
+    <parent link="bottom_box"/>
+    <child link="top_box"/>
+    <origin xyz="0 5 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="left_joint" type="fixed">
+    <parent link="bottom_box"/>
+    <child link="left_box"/>
+    <origin xyz="-2.5 2.5 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="right_joint" type="fixed">
+    <parent link="bottom_box"/>
+    <child link="right_box"/>
+    <origin xyz="2.5 2.5 0" rpy="0 0 0"/>
+  </joint>
+  <gazebo reference="bottom_box">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="top_box">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="right_box">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="left_box">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+</robot>
+

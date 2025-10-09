@@ -1,0 +1,41 @@
+[0.045s] Invoking command in '/home/ubuntuuser/ros2_ws/build/crazyflie_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ VIRTUAL_ENV_PROMPT=(.venv) /usr/bin/cmake /home/ubuntuuser/ros2_ws/src/crazyswarm2/crazyflie_interfaces -DCMAKE_INSTALL_PREFIX=/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces
+[0.275s] -- The C compiler identification is GNU 13.3.0
+[0.514s] -- The CXX compiler identification is GNU 13.3.0
+[0.562s] -- Detecting C compiler ABI info
+[0.958s] -- Detecting C compiler ABI info - done
+[1.012s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.015s] -- Detecting C compile features
+[1.016s] -- Detecting C compile features - done
+[1.051s] -- Detecting CXX compiler ABI info
+[1.508s] -- Detecting CXX compiler ABI info - done
+[1.559s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.560s] -- Detecting CXX compile features
+[1.565s] -- Detecting CXX compile features - done
+[1.583s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[2.238s] -- Found Python3: /home/ubuntuuser/ros2_ws/.venv/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.639s] -- Found builtin_interfaces: 2.0.3 (/opt/ros/jazzy/share/builtin_interfaces/cmake)
+[2.769s] -- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.806s] -- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.852s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.912s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.979s] -- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[3.052s] -- Found rosidl_default_generators: 1.6.0 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)
+[3.105s] -- Found rosidl_adapter: 4.6.6 (/opt/ros/jazzy/share/rosidl_adapter/cmake)
+[4.357s] Traceback (most recent call last):
+[4.357s]   File "/opt/ros/jazzy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>
+[4.358s]     from catkin_pkg.package import parse_package_string
+[4.358s] ModuleNotFoundError: No module named 'catkin_pkg'
+[4.366s] [31mCMake Error at /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):
+[4.366s]   execute_process(/home/ubuntuuser/ros2_ws/.venv/bin/python3
+[4.366s]   /opt/ros/jazzy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py
+[4.367s]   /home/ubuntuuser/ros2_ws/src/crazyswarm2/crazyflie_interfaces/package.xml
+[4.368s]   /home/ubuntuuser/ros2_ws/build/crazyflie_interfaces/ament_cmake_core/package.cmake)
+[4.368s]   returned error code 1
+[4.368s] Call Stack (most recent call first):
+[4.368s]   /opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)
+[4.368s]   /opt/ros/jazzy/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:220 (ament_package_xml)
+[4.369s]   CMakeLists.txt:20 (rosidl_generate_interfaces)
+[4.369s] 
+[4.369s] [0m
+[4.371s] -- Configuring incomplete, errors occurred!
+[4.402s] Invoked command in '/home/ubuntuuser/ros2_ws/build/crazyflie_interfaces' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer:/home/ubuntuuser/ros2_ws/install/r7021e_exploration:/home/ubuntuuser/ros2_ws/install/crazyflie_py:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ VIRTUAL_ENV_PROMPT=(.venv) /usr/bin/cmake /home/ubuntuuser/ros2_ws/src/crazyswarm2/crazyflie_interfaces -DCMAKE_INSTALL_PREFIX=/home/ubuntuuser/ros2_ws/install/crazyflie_interfaces

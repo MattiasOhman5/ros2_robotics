@@ -1,0 +1,37 @@
+[4.002s] Invoking command in '/home/ubuntuuser/ros2_ws/src/turtlebot3_trailer': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(.venv) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/turtlebot3_trailer build --build-base /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/build install --record /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/install.log --single-version-externally-managed install_data
+[6.218s] running egg_info
+[6.218s] creating ../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info
+[6.394s] writing ../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info/PKG-INFO
+[6.395s] writing dependency_links to ../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info/dependency_links.txt
+[6.395s] writing requirements to ../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info/requires.txt
+[6.395s] writing top-level names to ../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info/top_level.txt
+[6.395s] writing manifest file '../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info/SOURCES.txt'
+[6.647s] reading manifest file '../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info/SOURCES.txt'
+[6.648s] writing manifest file '../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info/SOURCES.txt'
+[6.651s] running build
+[6.651s] running build_py
+[6.651s] creating /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/build
+[6.651s] creating /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/build/lib
+[6.652s] creating /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/build/lib/turtlebot3_trailer
+[6.652s] copying turtlebot3_trailer/__init__.py -> /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/build/lib/turtlebot3_trailer
+[6.652s] running install
+[6.683s] running install_lib
+[6.829s] creating /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages/turtlebot3_trailer
+[6.829s] copying /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/build/lib/turtlebot3_trailer/__init__.py -> /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages/turtlebot3_trailer
+[6.836s] byte-compiling /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages/turtlebot3_trailer/__init__.py to __init__.cpython-312.pyc
+[6.837s] running install_data
+[6.837s] creating /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/ament_index
+[6.837s] creating /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/ament_index/resource_index
+[6.837s] creating /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/ament_index/resource_index/packages
+[6.848s] copying resource/turtlebot3_trailer -> /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/ament_index/resource_index/packages
+[6.848s] copying package.xml -> /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/turtlebot3_trailer
+[6.849s] creating /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/turtlebot3_trailer/launch
+[6.849s] copying launch/spawn_trailer.launch.py -> /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/turtlebot3_trailer/launch
+[6.849s] creating /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/turtlebot3_trailer/urdf
+[6.849s] copying urdf/trailer.urdf.xacro -> /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/turtlebot3_trailer/urdf
+[6.849s] copying urdf/trailer.urdf.xacro~ -> /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/share/turtlebot3_trailer/urdf
+[6.850s] running install_egg_info
+[7.004s] Copying ../../build/turtlebot3_trailer/turtlebot3_trailer.egg-info to /home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages/turtlebot3_trailer-0.0.0-py3.12.egg-info
+[7.006s] running install_scripts
+[7.902s] writing list of installed files to '/home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/install.log'
+[8.115s] Invoked command in '/home/ubuntuuser/ros2_ws/src/turtlebot3_trailer' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntuuser/ros2_ws/install/turtlebot3_trailer/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(.venv) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/turtlebot3_trailer build --build-base /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/build install --record /home/ubuntuuser/ros2_ws/build/turtlebot3_trailer/install.log --single-version-externally-managed install_data
