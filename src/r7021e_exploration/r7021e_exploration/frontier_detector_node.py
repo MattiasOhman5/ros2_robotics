@@ -27,6 +27,7 @@ class FrontierDetector(Node):
 
         free = (grid >= 0) & (grid <= 50)
         unk = (grid < 0)
+        occupied = (grid == 100) 
 
         h, w = grid.shape
         neigh_unknown = np.zeros_like(unk, dtype=bool)
@@ -53,7 +54,8 @@ class FrontierDetector(Node):
         for dy, dx in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             acc_shift(neigh_unknown, unk, dy, dx)
 
-        frontier = free & neigh_unknown
+        frontier = free & neigh_unknown & (~occupied)
+        
         frontier_map = np.zeros_like(unk, dtype=np.int8)
         frontier_map[frontier] = 100
 

@@ -1,0 +1,7 @@
+build/
+install/
+log/
+
+src/crazyswarm2/
+src/turtlebot3_simulation/
+src/turtlebot3_trailer/

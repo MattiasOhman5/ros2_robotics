@@ -19,7 +19,9 @@ from lifecycle_msgs.msg import Transition
 def generate_launch_description():
     # Get the directory of the grid_fast package
     share_dir = get_package_share_directory('r7021e_exploration')
-
+    
+    debug_value = os.environ.get('DEBUG', 'false').lower() == 'true'
+    
     # Path to the RViz configuration file
     rviz_config_file = os.path.join(
         share_dir, 'launch', 'rviz', 'exploration.rviz')
@@ -36,7 +38,8 @@ def generate_launch_description():
                 package='r7021e_exploration',
                 executable='navigation_node',
                 name='navigation_node',
-                parameters=[{'use_sim_time': False}],
+                parameters=[{'use_sim_time': False,
+                    'debug': debug_value,}],
             ),
             Node(
                 package='r7021e_exploration',
