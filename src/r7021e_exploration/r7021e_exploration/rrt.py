@@ -5,6 +5,7 @@ from geometry_msgs.msg import Pose
 import random
 import math
 from scipy.spatial import cKDTree
+from scipy.ndimage import distance_transform_edt
 from skimage.draw import line
 
 class Node:
@@ -14,6 +15,8 @@ class Node:
         self.parent = None
         self.children = []
         self.cost = 0.0
+        self.path_length = 0.0
+        self.obstacle_cost = 0.0
 
     def add_child(self, x, y):
         child_node = Node(x, y)
@@ -31,20 +34,30 @@ class RRT():
         self.root_node = node
         self.nodes = [self.root_node]
         self.og = occupancy_grid
+        self.obstacle_weight = 1000.0
 
         self.num_iterations = num_iterations
         self.tree_size = 1
-        self.step_size = 0.30
+        self.step_size = 0.1
         self.sample_goal_bias = 0.05
         self.goal = goal
         self.r_goal = 0.35
         self.best_cost = float('inf')
         self.best_node = None
+        self.best_path_length = float('inf')
+
+        self.d_safe = 0.1
+        self.sigma = 0.03
+        
+        grid = self.convert2grid(self.og)
+        obstacle_mask = (grid != 100).astype(np.uint8)
+        dist_cells = distance_transform_edt(obstacle_mask)
+        self.distance_map = dist_cells * self.og.info.resolution
 
         self.node_coords = [(node.x, node.y)]
         self.kd_tree = cKDTree(self.node_coords)
 
-        self.gamma_rrt = 2.0
+        self.gamma_rrt = 3.0
         self.d = 2
 
         self.sols_found = 0
@@ -60,8 +73,8 @@ class RRT():
     # primitive procedures from https://arxiv.org/pdf/1105.1186
 
     def sample_free(self):
-        if random.random() < self.sample_goal_bias:
-            return self.goal
+        #if random.random() < self.sample_goal_bias:
+        #    return self.goal
 
         x = self.og.info.origin.position.x + random.uniform(0, self.og.info.width * self.og.info.resolution)
         y = self.og.info.origin.position.y + random.uniform(0, self.og.info.height * self.og.info.resolution)
@@ -78,7 +91,7 @@ class RRT():
 
         # sampla från en ellips som täcker start och mål efter att man hittat en lösning
         # ... best_cost är infinite när man startar koden
-        if not math.isfinite(self.best_cost) or c_best <= c_min:
+        if not math.isfinite(self.best_path_length) or c_best <= c_min:
             return self.sample_free()
         
         # ellipsen har sin mittpunkt exakt mellan starten och målet
@@ -89,9 +102,9 @@ class RRT():
         theta = math.atan2(y1 - y0, x1 - x0)
 
         # r1 är det långt strecket i ellipsen, som går i en oroterad ellips går längs x-axeln
-        r1 = self.best_cost / 2.0 # formeln för denna är skriven i artikeln, Algorithm 2: rad 5
+        r1 = self.best_path_length / 2.0 # formeln för denna är skriven i artikeln, Algorithm 2: rad 5
         # r2 är det kort strecket i ellipsen (längs y-axeln)
-        r2 = math.sqrt(self.best_cost**2 - c_min**2) / 2.0 # formeln för denna är skriven i artikeln, Algorithm 2: rad 6
+        r2 = math.sqrt(self.best_path_length**2 - c_min**2) / 2.0 # formeln för denna är skriven i artikeln, Algorithm 2: rad 6
 
         # Algorithm 2: rad 8, SampleUnitBall
         u = random.random()
@@ -151,7 +164,7 @@ class RRT():
             value = self.og.data[index]
 
             # en cell är occupied om det har värdet 100
-            if value == 100: #or value == -1:
+            if value == 100 or value == -1:
                 return False
 
         return True
@@ -178,7 +191,8 @@ class RRT():
         gamma_rrt = self.gamma_rrt
         n = max(self.tree_size, 2)
 
-        radius = min(gamma_rrt * (math.log(n) / n) ** (1 / d), self.step_size)
+        #radius = min(gamma_rrt * (math.log(n) / n) ** (1 / d), self.step_size)
+        radius = gamma_rrt * (math.log(n) / n) ** (1 / d)
         return radius
     
     def plot_tree(self):
@@ -217,7 +231,18 @@ class RRT():
 
         path.reverse() # flippar ordningen så att listan går från start -> mål istället
         return path, self.best_cost
-        
+    
+    def get_obstacle_dist(self, x, y):
+        gx, gy = self.world_to_grid((x, y))
+        return self.distance_map[gy, gx]
+    
+    def convert2grid(self, occupancy_grid_msg):
+        width = occupancy_grid_msg.info.width
+        height = occupancy_grid_msg.info.height
+
+        map_grid = np.array(occupancy_grid_msg.data).reshape((height, width))
+
+        return map_grid
     
     # the main algorithm
 
@@ -227,7 +252,7 @@ class RRT():
         while i < self.num_iterations:
             i += 1
             # man samplar över hela kartan tills man hittar första lösningen och därefter samplar i en ellips (informed RRT*)
-            x_rand = self.informed_sample((0.0, 0.0), (self.goal[0], self.goal[1]), self.best_cost)
+            x_rand = self.informed_sample((self.root_node.x, self.root_node.y), (self.goal[0], self.goal[1]), self.best_path_length)
             x_nearest = self.nearest(x_rand)
             x_new = self.steer(x_nearest, x_rand)
 
@@ -235,21 +260,36 @@ class RRT():
             if self.collision_free((x_nearest.x, x_nearest.y), x_new):
                 x_near = self.near(x_new, self.get_radius())
                 x_new_node = Node(x_new[0], x_new[1])
-                x_new_node.parent = x_nearest
-                x_new_node.cost = x_nearest.cost + self.line_cost(x_new, (x_nearest.x, x_nearest.y))
+                
+                segment_length = self.line_cost(x_new, (x_nearest.x, x_nearest.y))
+                x_new_node.path_length = x_nearest.path_length + segment_length
 
+                obstacle_dist = self.get_obstacle_dist(x_new[0], x_new[1])
+                obstacle_cost = self.obstacle_weight * np.exp(-obstacle_dist / self.sigma)
+
+                #obstacle_cost = self.obstacle_weight / (obstacle_dist + 1e-6)
+                x_new_node.obstacle_cost = obstacle_cost
+                
+                x_new_node.parent = x_nearest
+                x_new_node.cost = x_nearest.cost + segment_length + obstacle_cost
+                
                 best_parent = x_nearest
                 best_cost = x_new_node.cost
+                best_length = x_new_node.path_length
 
                 for node in x_near:
                     if self.collision_free((node.x, node.y), x_new):
-                        cost = node.cost + self.line_cost((node.x, node.y), x_new)
+                        segment_length = self.line_cost((node.x, node.y), x_new)
+                        path_length = node.path_length + segment_length
+                        cost = node.cost + segment_length + obstacle_cost
                         if cost < best_cost:
                             best_parent = node
                             best_cost = cost
+                            best_length = path_length
 
                 x_new_node.parent = best_parent
                 x_new_node.cost = best_cost
+                x_new_node.path_length = best_length
                 best_parent.children.append(x_new_node)
                 self.add_node(x_new_node)
             # ----------------------------------------------------------------------------------------------------------------- 
@@ -261,26 +301,33 @@ class RRT():
                         continue
 
                     if self.collision_free((x_new_node.x, x_new_node.y), (node.x, node.y)):
-                        cost = x_new_node.cost + self.line_cost((x_new_node.x, x_new_node.y), (node.x, node.y))
-                        if cost < node.cost:
+                        segment_length = self.line_cost((x_new_node.x, x_new_node.y), (node.x, node.y))
+                        new_cost = x_new_node.cost + segment_length + node.obstacle_cost
+                        new_length = x_new_node.path_length + segment_length
+                        if new_cost < node.cost:
                             if node.parent:
                                 node.parent.children.remove(node)
                             node.parent = x_new_node 
-                            node.cost = cost
+                            node.cost = new_cost
+                            node.path_length = new_length
                             x_new_node.children.append(node)
             
             # -----------------------------------------------------------------------------------------------------------------
 
             # vi sparar den bäst väg vi hittar eftersom vi kör den en bestämd mängd iterationer
                 if self.in_goal_region(x_new):
-                    self.sols_found += 1
+                    #self.sols_found += 1
                     if x_new_node.cost < self.best_cost:
                         self.best_cost = x_new_node.cost
                         self.best_node = x_new_node
                         print(f"Found new best node, cost = {self.best_cost:.3f}")
 
-                    if self.sols_found == 5:
-                        return
+                    if x_new_node.path_length < self.best_path_length:
+                        self.best_path_length = x_new_node.path_length
+                        print(f"Found new shortest geometric path = {self.best_path_length:.3f}")
+
+                    #if self.sols_found == 5:
+                    #    return
 
         print("finished RRT")          
         return

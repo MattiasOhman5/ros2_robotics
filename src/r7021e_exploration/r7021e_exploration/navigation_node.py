@@ -20,6 +20,7 @@ from r7021e_exploration.rrt import RRT, Node as RRTNode
 from scipy.ndimage import binary_dilation
 from visualization_msgs.msg import Marker
 from geometry_msgs.msg import Point
+from builtin_interfaces.msg import Duration as DurationD
 
 
 def quat_to_yaw(q: Quaternion) -> float:
@@ -68,6 +69,10 @@ class PathPlannerNode(Node):
         self.path_pub =  self.create_publisher(Path, path_topic, default_qos)
 
         self.marker_pub = self.create_publisher(Marker, 'frontier_markers', 10)
+
+        self.tree_marker_pub = self.create_publisher(Marker, 'rrt_tree_marker', 10)
+
+        self.inflated_map_pub = self.create_publisher(OccupancyGrid, 'inflated_map', 10)
 
         # Subscribers
         self.map_sub = self.create_subscription(OccupancyGrid, map_topic, self._on_map, default_qos)
@@ -232,11 +237,14 @@ class PathPlannerNode(Node):
         # från schipy.ndimage: https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.binary_dilation.html
         inflated = binary_dilation(occupied, structure=structure, iterations=iterations)
 
-        grid[inflated] = 100
+        out_grid = grid.copy()
+        out_grid[inflated] = 100
 
-        map_msg.data = grid.flatten().tolist()
-
-        return map_msg
+        out = OccupancyGrid()
+        out.header = map_msg.header
+        out.info = map_msg.info
+        out.data = out_grid.flatten().tolist()
+        return out
     
     # task 4: frontier
 
@@ -250,9 +258,10 @@ class PathPlannerNode(Node):
 
         return map_grid
 
-    def goal_generation(self, frontier_msg, n_goals):
+    def goal_generation(self, frontier_msg, inflated):
         # målet med denna är att generera en lista med möjliga mål som vi kör RRT på
         frontier_grid = self.convert2grid(frontier_msg)
+        inflated_grid = self.convert2grid(inflated)
         # hitta all koordinater där vi har frontier points
         ys, xs = np.where(frontier_grid == 100)
 
@@ -263,11 +272,14 @@ class PathPlannerNode(Node):
         indices = np.arange(len(xs))
         # blanda koordinaterna för att sampla random frontier points https://arxiv.org/abs/2104.03724?
         np.random.shuffle(indices)
-        selected = indices[:min(n_goals, len(xs))]
 
         goals = []
-        for i in selected:
+        for i in indices:
+            
             x, y = xs[i], ys[i]
+
+            if inflated_grid[y, x] == 100:
+                continue 
 
             xw = frontier_msg.info.origin.position.x + x * frontier_msg.info.resolution
             yw = frontier_msg.info.origin.position.y + y * frontier_msg.info.resolution
@@ -276,44 +288,99 @@ class PathPlannerNode(Node):
         self.get_logger().info(f"Generated {len(goals)} goals.")
 
         return goals
+        
+    def find_nearest_free(self, inflated_grid, current_x, current_y, max_radius):
+        grid = self.convert2grid(inflated_grid)
+        height = inflated_grid.info.height
+        width = inflated_grid.info.width
+        res = inflated_grid.info.resolution
+        ox = inflated_grid.info.origin.position.x
+        oy = inflated_grid.info.origin.position.y
+
+        gx = int((current_x - ox) / res)
+        gy = int((current_y - oy) / res)
+        radius_cells = int(max_radius / res)
+        if 0 <= gx < width and 0 <= gy < height:
+            if grid[gy, gx] == 100 or grid[gy, gx] == -1:
+                self.get_logger().warn("WAS IN OCCUPIED - GOT NEW START CELL TO PLAN FROM")
+                for r in range(1, radius_cells + 1):
+                    for dx in range(-r, r + 1):
+                        for dy in range(-r, r + 1):
+                            x = gx + dx
+                            y = gy + dy
+                            if 0 <= x < width and 0 <= y < height:
+                                if grid[y, x] == 0:
+                                    xw = ox + x * res
+                                    yw = oy + y * res
+                                    return (xw, yw)
+        return (current_x, current_y)
     
-    def compute_information_gain(self, path, map_msg, sensor_range):
-        # vi räknar hur många unknown celler är runt varje delpunkt i en path
-        # information gain är hög om man åker till ett ställe där man upptäcker många unknown celler
-        grid = self.convert2grid(map_msg)
-        origin = map_msg.info.origin
-        resolution = map_msg.info.resolution
-        width = map_msg.info.width
-        height = map_msg.info.height
-        radius_cells = int(sensor_range / map_msg.info.resolution)
-        discovered = set()
 
-        if path == []:
-            return float('inf')
 
-        for xw, yw in path:
-            gx = int((xw - origin.position.x) / resolution)
-            gy = int((yw - origin.position.y) / resolution)
-            
-            if gx < 0 or gy < 0 or gx >= width or gy >= height:
+    
+    # ----------------- Visualization ------------
+
+    def plot_rrt_tree(self, rrt):
+        marker = Marker()
+        marker.header.frame_id = self.global_frame
+        marker.header.stamp = self.get_clock().now().to_msg()
+        marker.ns = "rrt_tree"
+        marker.id = 0
+        marker.type = Marker.LINE_LIST
+        marker.action = Marker.ADD
+
+        points = []
+        for node in rrt.nodes:
+            if node.parent is None:
                 continue
+            p = Point()
+            p.x = node.x
+            p.y = node.y
+            p.z = 0.0
+            q = Point()
+            q.x = node.parent.x
+            q.y = node.parent.y
+            q.z = 0.0
+            points.append(p)
+            points.append(q)
+        
+        marker.points = points
 
-            x_min = max(0, gx - radius_cells)
-            x_max = min(width, gx + radius_cells)
-            y_min = max(0, gy - radius_cells)
-            y_max = min(height, gy + radius_cells)
+        marker.scale.x = 0.01
+        marker.color.r = 1.0
+        marker.color.g = 0.0
+        marker.color.b = 0.0
+        marker.color.a = 1.0
 
-            window = np.where(grid[y_min:y_max, x_min:x_max] == -1)
+        marker.lifetime = DurationD(sec=5)
+        marker.frame_locked = False
 
-            for y, x in zip(window[0], window[1]):
-                discovered.add((x + x_min, y + y_min))
+        self.tree_marker_pub.publish(marker)
 
-        return len(discovered)
-    
-    def total_cost(self, path_cost, info_gain, path_weight, info_weight):
-        # kombinera kostnaden för path och information gain för att välja den bästa path
-        # notera att jag har dock inte tune:at dessa vikter men den verkar fungera iaf
-        return path_cost * path_weight - info_gain * info_weight
+        points = []
+        node_marker = Marker()
+        node_marker.header.frame_id = self.global_frame
+        node_marker.header.stamp = self.get_clock().now().to_msg()
+        node_marker.ns = "rrt_nodes"
+        node_marker.id = 1
+        node_marker.type = Marker.SPHERE_LIST
+        node_marker.action = Marker.ADD
+
+        node_marker.scale.x = 0.03
+        node_marker.scale.y = 0.03
+        node_marker.scale.z = 0.03
+        node_marker.color.r = 0.0
+        node_marker.color.g = 0.0
+        node_marker.color.b = 1.0
+        node_marker.color.a = 1.0
+        node_marker.lifetime = DurationD(sec=5)
+
+        for node in rrt.nodes:
+            p = Point(x=node.x, y=node.y, z=0.0)
+            points.append(p)
+
+        node_marker.points = points
+        self.tree_marker_pub.publish(node_marker)
 
     # ----------------- Planning -----------------
 
@@ -333,10 +400,14 @@ class PathPlannerNode(Node):
             return None
 
         # börja med att inflate all obstacles så vi inte planerar för tajt path (task 3)
-        inflated = self.inflate_grid(map_msg, 4)
+        inflated = self.inflate_grid(map_msg, 3)
+
+        self.inflated_map_pub.publish(inflated)
+
+        start_x, start_y = self.find_nearest_free(inflated, start_x, start_y, max_radius=2.0)
 
         # generera en lista med n_goals vi kan planera path till
-        goals = self.goal_generation(frontier_msg, n_goals=50)
+        goals = self.goal_generation(frontier_msg, inflated)
 
         if not goals:
             self.get_logger().warn("No goals generated from frontiers.")
@@ -345,8 +416,6 @@ class PathPlannerNode(Node):
         self.get_logger().info(f"Trying {len(goals)} frontier goals...")
 
         # håll koll på den bästa pathen
-        best_path = []
-        best_cost = float('inf')
         fail_count = 0
         
         # kör rrt på all potentiella mål
@@ -354,35 +423,23 @@ class PathPlannerNode(Node):
             root_node = RRTNode(start_x, start_y)
             self.get_logger().warn(f"Starting RRT with goal {goal}")
 
-            planner = RRT(
-                node=root_node,
-                occupancy_grid=inflated,
-                num_iterations=50000,
-                goal=goal
-            )
+            planner = RRT(node=root_node, occupancy_grid=inflated, num_iterations=10000, goal=goal)
             planner.run_RRT()
+            self.plot_rrt_tree(planner)
             path, path_cost = planner.extract_best_path()
-
-            info_gain = self.compute_information_gain(path, map_msg, sensor_range=2.0)
-            total_cost = self.total_cost(path_cost, info_gain, path_weight=3.0, info_weight=2.0)
 
             if path == []:
                 fail_count += 1
 
-            if total_cost < best_cost:
-                best_cost = total_cost
-                best_path = path
 
             if path != []:
-                path_msg = self._make_path(best_path)
+                path_msg = self._make_path(path)
                 self.path_pub.publish(path_msg)
-                self.get_logger().info(f"Published RRT* path with {len(best_path)} points.")
+                self.get_logger().info(f"Published RRT* path with {len(path)} points.")
                 return path_msg
 
         self.get_logger().info(f"failed {fail_count}/{len(goals)}")
 
-        if best_path == []:
-            return None
 
         # publicera den bästa path vi hittade
         # path_msg = self._make_path(best_path)

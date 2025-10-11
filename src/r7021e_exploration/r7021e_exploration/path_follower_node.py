@@ -8,6 +8,7 @@ from rclpy.node import Node
 from nav_msgs.msg import Path
 from geometry_msgs.msg import TwistStamped, TransformStamped
 from tf2_ros import Buffer, TransformListener, LookupException, ConnectivityException, ExtrapolationException
+from sensor_msgs.msg import LaserScan
 
 
 class PathFollower(Node):
@@ -19,9 +20,9 @@ class PathFollower(Node):
         # Parameters
         self.declare_parameter('max_v', 0.15)  # m/s
         self.declare_parameter('kp_vel', 1.0)
-        self.declare_parameter('max_w', 1.0)  # rad/s
+        self.declare_parameter('max_w', 0.8)  # rad/s
         self.declare_parameter('kp_yaw', 2.0)
-        self.declare_parameter('look_ahead', 0.2)  # m
+        self.declare_parameter('look_ahead', 0.1)  # m
 
         self.max_v = float(self.get_parameter('max_v').value)
         self.kp_vel = float(self.get_parameter('kp_vel').value)
@@ -95,7 +96,7 @@ class PathFollower(Node):
         ang_to_target = math.atan2(dy, dx)
         dif_ang = self.ang_dist(self.robot_yaw, ang_to_target)
 
-        if abs(dif_ang)>0.3:
+        if abs(dif_ang)>0.25:
             vel_msg.twist.linear.x = 0.0
         vel_msg.twist.angular.z = dif_ang * self.kp_yaw
         if abs(vel_msg.twist.angular.z) > self.max_w:
