@@ -1,0 +1,19 @@
+ekf_slam_node:
+  ros__parameters:
+    scan_topic: /scan
+    odom_topic: /odom
+    map_frame: map
+    base_frame: base_link
+    laser_frame: base_scan          # must match LaserScan.header.frame_id
+    publish_static_laser_tf: false  # true only if your robot doesn't already publish base->laser
+    # EKF parameters
+    Q_diag: [0.000001, 0.000001, 0.0001]  # pose process noise (x,y,theta) (0.001m, 0.001m, 0.01rad), it's sigma^2
+    R_diag: [0.01, 0.00121]           # range-bearing sensor noise (0.1m, 2deg), it's sigma^2
+    prediction_rate: 20.0               # Hz
+    path_max_size: 2000                 # max poses in path 
+    # Raster parameters for landmark extraction
+    raster_res: 0.02
+    raster_extent: 6.0
+    raster_min_px: 2
+    raster_max_px: 60
+    raster_max_aspect: 1.6

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="3">
+    <name>r7021e_ekf_slam</name>
+    <version>0.1.0</version>
+    <description>Teaching package: EKF-SLAM for Turtlebot (2D LiDAR + wheel odom) on ROS 2 Jazzy.</description>
+    <maintainer email="niksta@ltu.se">Nikolaos Stathoulopoulos</maintainer>
+    <license>MIT</license>
+
+    <buildtool_depend>ament_python</buildtool_depend>
+
+    <exec_depend>rclpy</exec_depend>
+    <exec_depend>std_msgs</exec_depend>
+    <exec_depend>sensor_msgs</exec_depend>
+    <exec_depend>geometry_msgs</exec_depend>
+    <exec_depend>nav_msgs</exec_depend>
+    <exec_depend>visualization_msgs</exec_depend>
+    <exec_depend>tf2_ros</exec_depend>
+
+    <!-- For point cloud construction -->
+    <exec_depend>builtin_interfaces</exec_depend>
+
+    <!-- Optional: RViz and rosbag playback are external tools -->
+
+    <export>
+        <build_type>ament_python</build_type>
+    </export>
+</package>
