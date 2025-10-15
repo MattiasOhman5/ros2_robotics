@@ -28,6 +28,7 @@ setup(
             'trajectory_circle=lab2_pkg.trajectory_circle:main',
             'mpc_controller_sim=lab2_pkg.mpc_controller_sim:main',
             'mpc_controller_2_sim=lab2_pkg.mpc_controller_2_sim:main',
+            'visual_node=lab2_pkg.visualization_node:main'
         ],
     },
 )

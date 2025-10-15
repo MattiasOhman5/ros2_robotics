@@ -136,33 +136,40 @@ class EKFSLAM:
         #   TODO:
         #     1) Form z_j = [[r],[phi]] from z_list[j].
 
-            z_j = np.array([[z_list[j][0]], [z_list[j][1]]], dtype=float)
+            z_j = np.array([[z_list[j][0]], [z_list[j][1]]], dtype=float) # actual measurement
 
         #     2) Get measurement Jacobian H and predicted measurement \hat{z} via
         #            H, zhat = measurement_jacobian_and_h(self.mu, i) <-- see utils.py
         #        where zhat = h(x, m_i) = [[range],[bearing]] in the robot frame.
 
-            H, zhat = measurement_jacobian_and_h(self.mu, i)
+            H, zhat = measurement_jacobian_and_h(self.mu, i) # predict measurement
 
         #     3) Innovation covariance:    S = H Σ Hᵀ + R
 
-            S = H @ self.Sigma @ H.T + self.R
+            S = H @ self.Sigma @ H.T + self.R       # computing covariance of the predicted measurement
+                                                    # large R (sensor noise) -> large S -> large measurement uncertainty ->
+                                                    # -> small kalman gain K -> trust the prediction more
+
+                                                    # small R -> K large -> Trust measurement more
 
         #     4) Kalman gain:              K = Σ Hᵀ S^{-1}
 
-            K = self.Sigma @ H.T @ np.linalg.inv(S)
+            K = self.Sigma @ H.T @ np.linalg.inv(S) # how much do we trust measurement vs the prediction
+                                                    # 
 
         #     5) Innovation:               ν = z_j - zhat 
 
-            nu = np.array([z_j[0] - zhat[0], angle_normalize(z_j[1] - zhat[1])])
+            nu = np.array([z_j[0] - zhat[0], angle_normalize(z_j[1] - zhat[1])]) # how wrong are we?
 
         #     6) State update:             μ ← μ + K ν; 
         
-            self.mu = self.mu + K @ nu
+            self.mu = self.mu + K @ nu                         # both robot pose and landmark states are updated
+                                                               # since H contains partial derivatives wrt to both
+                                                               # sigma describes how everything is correlated
 
         #     7) Covariance update:        Σ ← (I - K H) Σ
 
-            I = np.eye(self.mu.size)
+            I = np.eye(self.mu.size)                       # should reduce the uncertainty
             self.Sigma = (I - K @ H) @ self.Sigma
             
         # Conservative births with duplicate suppression
@@ -205,11 +212,13 @@ class EKFSLAM:
 
         #   3) Augment covariance Σ with the new landmark.
 
+        # https://www.iri.upc.edu/people/jsola/JoanSola/objectes/curs_SLAM/SLAM2D/SLAM%20course.pdf
+
         Jx = np.array([[1, 0, -r * s],
-                       [0, 1,  r * c]], dtype=float)
+                       [0, 1,  r * c]], dtype=float) # jacobian wrt the robot pose (x, y, theta)
         
         Jz = np.array([[c, -r * s],
-                       [s,  r * c]], dtype=float)
+                       [s,  r * c]], dtype=float) # jacobian wrt the measurement (radius, bearing)
         
         sigma_xx = self.Sigma[:3, :3]
 

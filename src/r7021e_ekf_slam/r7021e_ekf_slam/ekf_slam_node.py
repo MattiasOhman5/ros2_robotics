@@ -18,6 +18,10 @@ from sensor_msgs.msg import LaserScan, PointCloud2
 from geometry_msgs.msg import TransformStamped, PoseStamped
 from .landmark_extraction import extract_landmarks_from_scan_raster
 from .ekf_slam_impl import EKFSLAM  # choose solution vs student 
+import time
+import csv
+import os
+import glob
 
 
 class EKFSLAMNode(Node):
@@ -43,6 +47,7 @@ class EKFSLAMNode(Node):
         # --- EKF-SLAM parameters ---
         self.Q_diag = self.get_parameter('Q_diag').value
         self.R_diag = self.get_parameter('R_diag').value
+        self.publish_static_tf = self.get_parameter('publish_static_laser_tf').value
         # --- Publishers ---
         self.odom_pub = self.create_publisher(Odometry, 'ekf_slam/odom', 10)
         self.map_pub = self.create_publisher(PointCloud2, 'ekf_slam/landmarks', 10)
@@ -57,7 +62,7 @@ class EKFSLAMNode(Node):
         self.tf_buffer = tf2_ros.Buffer(cache_time=rclpy.duration.Duration(seconds=10.0))
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
         # Optionally publish a static base->laser transform (only if your robot doesn't publish one)
-        if bool(self.get_parameter('publish_static_laser_tf').value):
+        if bool(self.publish_static_tf):
             self._publish_static_base_to_laser()
         # --- Subscriptions ---
         self.scan_sub = self.create_subscription(LaserScan, self.scan_topic, self.scan_cb,
@@ -86,6 +91,40 @@ class EKFSLAMNode(Node):
         self.get_logger().info(f"EKF-SLAM: Q_diag={self.Q_diag}, R_diag={self.R_diag}")
         self.get_logger().info(f"EKF-SLAM: path_max_size={self.path_max_size}")
         self.get_logger().info(f"EKF-SLAM: prediction_rate={rate} Hz")
+
+        # log stuff:
+
+        # --- Logging setup (timing and state size) ---
+        log_dir = "/home/mattias/ros2_robotics/src/r7021e_ekf_slam/datalogs"
+        os.makedirs(log_dir, exist_ok=True)
+
+        # Determine next available log number
+        existing_logs = sorted(glob.glob(os.path.join(log_dir, "log_file_*.csv")))
+        next_index = 1
+        if existing_logs:
+            last = os.path.basename(existing_logs[-1])
+            try:
+                last_num = int(last.replace("log_file_", "").replace(".csv", ""))
+                next_index = last_num + 1
+            except ValueError:
+                pass
+
+        self.log_path = os.path.join(log_dir, f"log_file_{next_index}.csv")
+
+        # Open CSV and write header
+        self.log_file = open(self.log_path, "w", newline="")
+        self.csv_writer = csv.writer(self.log_file)
+
+        # Retrieve current filter parameters
+        Q_vals = self.get_parameter("Q_diag").value
+        R_vals = self.get_parameter("R_diag").value
+
+        # Write header (with parameters)
+        self.csv_writer.writerow([
+            f"# Q_diag={Q_vals}, R_diag={R_vals}"
+        ])
+        self.csv_writer.writerow(["timestamp", "state_size", "elapsed"])
+        self.get_logger().info(f"Logging EKF timing to {self.log_path}")
         
     # --- Odometry: just store the latest odom, apply on scan or timer ---
     def odom_cb(self, msg: Odometry):
@@ -110,6 +149,8 @@ class EKFSLAMNode(Node):
             )
             return
 
+        start_time = time.perf_counter()
+
         # Flush all pending odometry into a single predict step
         self._apply_pending_odom_predict()
 
@@ -129,6 +170,16 @@ class EKFSLAMNode(Node):
         # Measurement update (if we have features)
         if z_list_base:
             self.ekf.update_with_scan_features(z_list_base)
+
+        # Logging
+        end_time = time.perf_counter()
+        elapsed = (end_time - start_time)
+        state_size = self.ekf.mu.shape[0] // 2
+        
+
+        self.csv_writer.writerow([time.time(), state_size, elapsed])
+        self.log_file.flush()
+
 
         # Publish
         stamp = Time.from_msg(msg.header.stamp)
@@ -359,5 +410,7 @@ def main():
     rclpy.init()
     node = EKFSLAMNode()
     rclpy.spin(node)
+    if hasattr(node, "log_file") and not node.log_file.closed:
+            node.log_file.close()
     node.destroy_node()
     rclpy.shutdown()

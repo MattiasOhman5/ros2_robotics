@@ -156,7 +156,7 @@ def measurement_jacobian_and_h(mu: np.ndarray, lm_index: int) -> Tuple[np.ndarra
 
     q = max(dx*dx + dy*dy, 1e-12)
     r = max(np.sqrt(q), 1e-12)
-    phi = angle_normalize(np.atan2(dy, dx) - theta)
+    phi = angle_normalize(np.arctan2(dy, dx) - theta)
 
     zhat = np.array([[r], [phi]], dtype=float)
 

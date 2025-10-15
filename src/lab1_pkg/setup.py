@@ -22,7 +22,8 @@ setup(
     entry_points={
         'console_scripts': [
             'controller_node=lab1_pkg.simple_controller:main',
-            'trajectory_node=lab1_pkg.trajectory:main'
+            'trajectory_node=lab1_pkg.trajectory:main',
+            'visual_node=lab1_pkg.visualization_node:main'
         ],
     },
 )
