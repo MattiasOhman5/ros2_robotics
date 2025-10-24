@@ -1,3 +1,5 @@
+#!/home/ros2_ws/.venv/bin/python3
+
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node, PushRosNamespace

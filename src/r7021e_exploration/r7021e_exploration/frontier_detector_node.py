@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/~/ros2_ws/.venv/bin/python3
 # frontier_detector_node.py
 
 import rclpy

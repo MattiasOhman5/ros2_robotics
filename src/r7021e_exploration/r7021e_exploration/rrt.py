@@ -1,3 +1,4 @@
+#!/home/ros2_ws/.venv/bin/python3
 import numpy as np
 import matplotlib.pyplot as plt
 from nav_msgs.msg import OccupancyGrid
@@ -12,6 +13,7 @@ class Node:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
         self.parent = None
         self.children = []
         self.cost = 0.0
@@ -265,7 +267,7 @@ class RRT():
                 x_new_node.path_length = x_nearest.path_length + segment_length
 
                 obstacle_dist = self.get_obstacle_dist(x_new[0], x_new[1])
-                obstacle_cost = self.obstacle_weight * np.exp(-obstacle_dist / self.sigma)
+                obstacle_cost = self.obstacle_weight / (obstacle_dist + 1e-6)
 
                 #obstacle_cost = self.obstacle_weight / (obstacle_dist + 1e-6)
                 x_new_node.obstacle_cost = obstacle_cost
@@ -302,7 +304,7 @@ class RRT():
 
                     if self.collision_free((x_new_node.x, x_new_node.y), (node.x, node.y)):
                         segment_length = self.line_cost((x_new_node.x, x_new_node.y), (node.x, node.y))
-                        new_cost = x_new_node.cost + segment_length + node.obstacle_cost
+                        new_cost = x_new_node.cost + segment_length
                         new_length = x_new_node.path_length + segment_length
                         if new_cost < node.cost:
                             if node.parent:

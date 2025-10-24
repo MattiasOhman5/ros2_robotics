@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/ros2_ws/.venv/bin/python3
 # frontier_detector_node.py
 
 import math
@@ -18,11 +18,11 @@ class PathFollower(Node):
         self.path_header=""
 
         # Parameters
-        self.declare_parameter('max_v', 0.15)  # m/s
+        self.declare_parameter('max_v', 0.1)  # m/s
         self.declare_parameter('kp_vel', 1.0)
-        self.declare_parameter('max_w', 0.8)  # rad/s
-        self.declare_parameter('kp_yaw', 2.0)
-        self.declare_parameter('look_ahead', 0.1)  # m
+        self.declare_parameter('max_w', 0.4)  # rad/s
+        self.declare_parameter('kp_yaw', 1.0)
+        self.declare_parameter('look_ahead', 0.2)  # m
 
         self.max_v = float(self.get_parameter('max_v').value)
         self.kp_vel = float(self.get_parameter('kp_vel').value)

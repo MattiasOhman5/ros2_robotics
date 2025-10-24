@@ -1,3 +1,4 @@
+#!/home/ros2_ws/.venv/bin/python3
 from setuptools import find_packages, setup
 import os
 from glob import glob
