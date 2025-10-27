@@ -30,19 +30,19 @@ def generate_launch_description():
                 package='r7021e_exploration',
                 executable='frontier_detector_node',
                 name='frontier_detector', 
-                parameters=[{'use_sim_time': False}],
+                parameters=[{'use_sim_time': True}],
             ),
             Node(
                 package='r7021e_exploration',
                 executable='navigation_node',
                 name='navigation_node',
-                parameters=[{'use_sim_time': False}],
+                parameters=[{'use_sim_time': True}],
             ),
             Node(
                 package='r7021e_exploration',
                 executable='path_follower_node',
                 name='path_follower_node',
-                parameters=[{'use_sim_time': False}],
+                parameters=[{'use_sim_time': True}],
             ),
             Node(
                 package='rviz2',
@@ -86,7 +86,7 @@ def generate_launch_description():
           config,
           {
             'use_lifecycle_manager': use_lifecycle_manager,
-            'use_sim_time': False,
+            'use_sim_time': True,
           }
         ],
         package='slam_toolbox',

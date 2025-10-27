@@ -247,6 +247,40 @@ class RRT():
         return map_grid
     
     # the main algorithm
+    def get_clearance_score(self, x, y):
+        """Returns higher values for open areas, lower for constricted regions"""
+        gx, gy = self.world_to_grid((x, y))
+        
+        # Sample distances in 8 directions around the point
+        angles = [0, 45, 90, 135, 180, 225, 270, 315]
+        search_radius = int(0.5 / self.og.info.resolution)  # search 0.5m in each direction
+        
+        clearances = []
+        for angle_deg in angles:
+            angle_rad = math.radians(angle_deg)
+            for r in range(1, search_radius):
+                test_gx = gx + int(r * math.cos(angle_rad))
+                test_gy = gy + int(r * math.sin(angle_rad))
+                
+                if (test_gx < 0 or test_gy < 0 or 
+                    test_gx >= self.og.info.width or test_gy >= self.og.info.height):
+                    clearances.append(r * self.og.info.resolution)
+                    break
+                    
+                index = test_gy * self.og.info.width + test_gx
+                if self.og.data[index] == 100 or self.og.data[index] == -1:
+                    clearances.append(r * self.og.info.resolution)
+                    break
+            else:
+                clearances.append(search_radius * self.og.info.resolution)
+        
+        # Use minimum clearance (narrowest direction) as constriction measure
+        min_clearance = min(clearances)
+        avg_clearance = sum(clearances) / len(clearances)
+        
+        # Combine both: narrow passages have low min AND low avg
+        return min_clearance * 0.7 + avg_clearance * 0.3
+
 
     def run_RRT(self):
         # vi kör en bestämd mängd iterationer och sparar den bästa lösningen
@@ -267,7 +301,9 @@ class RRT():
                 x_new_node.path_length = x_nearest.path_length + segment_length
 
                 obstacle_dist = self.get_obstacle_dist(x_new[0], x_new[1])
-                obstacle_cost = self.obstacle_weight / (obstacle_dist + 1e-6)
+                clearance = self.get_clearance_score(x_new[0], x_new[1])
+                
+                obstacle_cost = self.obstacle_weight * math.exp(-clearance / 0.3)
 
                 #obstacle_cost = self.obstacle_weight / (obstacle_dist + 1e-6)
                 x_new_node.obstacle_cost = obstacle_cost
