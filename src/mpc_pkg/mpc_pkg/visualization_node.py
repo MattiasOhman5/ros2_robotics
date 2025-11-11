@@ -27,8 +27,8 @@ class TrajectoryVisualizer(Node):
         obs1.id = 2
         obs1.type = Marker.CYLINDER
         obs1.action = Marker.ADD
-        obs1.pose.position.x = 0.5
-        obs1.pose.position.y = 0.0
+        obs1.pose.position.x = 0.0
+        obs1.pose.position.y = 0.5
         obs1.pose.position.z = 0.0
         obs1.scale.x = 2 * 0.15  
         obs1.scale.y = 2 * 0.15
@@ -47,8 +47,8 @@ class TrajectoryVisualizer(Node):
         obs2.id = 3
         obs2.type = Marker.CYLINDER
         obs2.action = Marker.ADD
-        obs2.pose.position.x = -0.5
-        obs2.pose.position.y = 0.0
+        obs2.pose.position.x = 0.0
+        obs2.pose.position.y = -0.5
         obs2.pose.position.z = 0.0
         obs2.scale.x = 2 * 0.15
         obs2.scale.y = 2 * 0.15

@@ -39,6 +39,6 @@ class Trajectory(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = Trajectory()
-    rclpy.spin(node)
+    rclpy.spin(node) 
     node.destroy_node()
     rclpy.shutdown()

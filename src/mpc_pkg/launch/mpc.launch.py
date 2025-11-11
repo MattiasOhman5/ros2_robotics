@@ -13,8 +13,14 @@ def generate_launch_description():
         ),
         Node(
             package='mpc_pkg',
-            executable='trajectory_1',
-            name='trajectory_node',
+            executable='trajectory_circle',
+            name='trajectory_circle',
             output='screen',
         ),
+        Node(
+            package='mpc_pkg',
+            executable='visualization_node',
+            name='visualization_node',
+            output='screen',
+        )
     ])
