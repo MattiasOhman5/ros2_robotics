@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 import os
 from glob import glob
 
-package_name = 'r7021e_exploration'
+package_name = 'mpc_pkg'
 
 setup(
     name=package_name,
@@ -14,7 +14,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, 'launch'),
-         glob(os.path.join('launch', '*launch.py'))),
+            glob(os.path.join('launch', '*.py'))),
         (os.path.join('share', package_name, 'launch', 'rviz'),
          glob(os.path.join('launch', 'rviz', '*.rviz'))),
         (os.path.join('share', package_name, 'config'),
@@ -29,9 +29,14 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'frontier_detector_node = r7021e_exploration.frontier_detector_node:main',
-            'navigation_node = r7021e_exploration.navigation_node:main',
-            'path_follower_node = r7021e_exploration.path_follower_node:main',
+            'mpc_controller=mpc_pkg.mpc_controller:main',
+            'mpc_controller_2=mpc_pkg.mpc_controller_2:main',
+            'trajectory_1=mpc_pkg.trajectory_1:main',
+            'trajectory_2=mpc_pkg.trajectory_2:main',
+            'trajectory_circle=mpc_pkg.trajectory_circle:main',
+            'mpc_controller_sim=mpc_pkg.mpc_controller_sim:main',
+            'mpc_controller_2_sim=mpc_pkg.mpc_controller_2_sim:main',
+            'visual_node=mpc_pkg.visualization_node:main'
         ],
     },
 )
