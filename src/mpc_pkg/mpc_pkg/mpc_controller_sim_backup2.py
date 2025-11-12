@@ -19,32 +19,30 @@ class MPC_Controller(Node):
         self.goal_tolerance = 0.05
         self.turtlebot_radius = 0.11
         self.safety_distance = 0.05
+        
+        # Cap geometry from SDF
+        self.cap_offset = 0.35  # Cap center: 0.05 (joint) + 0.25 (inertial offset)
+        self.cap_half_width = 0.1
+        self.cap_half_length = 0.18
 
         self.model = self.defineTBotModel()
         self.mpc = self.defineTBotMPC(model=self.model, ts=0.1, N=20)
 
 
-    # ----------------- Define Model -----------------
     def defineTBotModel(self):
-
         model_type = 'continuous'
         model = do_mpc.model.Model(model_type)
 
-        # States
         x = model.set_variable(var_type='_x', var_name='x', shape=(1,1))
         y = model.set_variable(var_type='_x', var_name='y', shape=(1,1))
         th = model.set_variable(var_type='_x', var_name='th', shape=(1,1))
 
-        # Inputs
         vx = model.set_variable(var_type='_u', var_name='vx')
         vt = model.set_variable(var_type='_u', var_name='vt')
-
-        # Time-varying parameters (setpoints)
 
         xdes = model.set_variable(var_type='_tvp', var_name='xdes')
         ydes = model.set_variable(var_type='_tvp', var_name='ydes')
 
-        # Dynamics
         model.set_rhs('x', vx*ca.cos(th))
         model.set_rhs('y', vx*ca.sin(th))
         model.set_rhs('th', vt)
@@ -52,85 +50,79 @@ class MPC_Controller(Node):
         model.setup()
         return model
     
-    # ----------------- Setup MPC -----------------
+
     def defineTBotMPC(self, model, ts, N):
         mpc = do_mpc.controller.MPC(model)
-        mpc.settings.supress_ipopt_output() 
         setup_mpc = {
-            'n_horizon': N,
+            'n_horizon': 40,
             't_step': ts,
-            'n_robust': 1,
-            'store_full_solution': True
+            'n_robust': 0,
+            'store_full_solution': True,
+            'nlpsol_opts': {
+                'ipopt.max_iter': 250,
+                'ipopt.tol': 1e-4,
+                'ipopt.acceptable_tol': 1e-3,
+            }
         }
         mpc.set_param(**setup_mpc)
 
-        # Objective
-        lterm = (model.x['x'] - model.tvp['xdes'])**2 + (model.x['y'] - model.tvp['ydes'])**2
-        mterm = lterm
-        mpc.set_objective(mterm=mterm, lterm=lterm)
-        mpc.set_rterm(vx=1e-2, vt=1e-2)
+        # Base tracking objective
+        tracking_error = (model.x['x'] - model.tvp['xdes'])**2 + (model.x['y'] - model.tvp['ydes'])**2
+        
+        # Obstacle parameters
+        obstacles = [
+            (0.0, 0.5, 0.15, 'obs1'),
+            (0.0, -0.5, 0.15, 'obs2')
+        ]
+        
+        # Initialize repulsive cost
+        repulsive_cost = 0
+        
+        for x_obs, y_obs, r_obs, obs_name in obstacles:
+            # --- BASE FOOTPRINT ---
+            dist_base = ca.sqrt((model.x['x'] - x_obs)**2 + (model.x['y'] - y_obs)**2)
+            clearance_base = self.turtlebot_radius + r_obs + self.safety_distance
+            
+            # Hard constraint for base
+            mpc.set_nl_cons(f'{obs_name}_base',
+                clearance_base - dist_base,
+                ub=0.0,
+                soft_constraint=False)
+            
+            # --- CAP---
+            dx = (x_obs - model.x['x'])*ca.cos(model.x['th']) + (y_obs - model.x['y'])*ca.sin(model.x['th'])
+            dy = -(x_obs - model.x['x'])*ca.sin(model.x['th']) + (y_obs - model.x['y'])*ca.cos(model.x['th'])
 
-        # State Bounds
+            # Distance to cap rectangle (accounts for width and length)
+            dx_to_cap = ca.fmax(0, ca.fabs(dx - self.cap_offset) - self.cap_half_length)
+            dy_to_cap = ca.fmax(0, ca.fabs(dy) - self.cap_half_width)
+            dist_to_cap = ca.sqrt(dx_to_cap**2 + dy_to_cap**2)
+
+            clearance_cap = r_obs + self.safety_distance
+
+            # Hard constraint for cap
+            mpc.set_nl_cons(f'{obs_name}_cap',
+                clearance_cap - dist_to_cap,
+                ub=0.0,
+                soft_constraint=False)
+            
+           
+        # Combine tracking and repulsion in objective
+        lterm = 10.0 * tracking_error + 3.0 * repulsive_cost
+        mterm = 20.0 * tracking_error + 5.0 * repulsive_cost
+        
+        mpc.set_objective(mterm=mterm, lterm=lterm)
+        mpc.set_rterm(vx=0.1, vt=0.5)
+
+        # State and control bounds
         mpc.bounds['lower','_x','x'] = -1.0
         mpc.bounds['upper','_x','x'] =  1.0
         mpc.bounds['lower','_x','y'] = -1.0
         mpc.bounds['upper','_x','y'] =  1.0
-
-        # Input Constraints
         mpc.bounds['lower','_u','vx'] = 0.0
         mpc.bounds['upper','_u','vx'] =  0.5
         mpc.bounds['lower','_u','vt'] = -0.8
         mpc.bounds['upper','_u','vt'] =  0.8
-
-        # Nonlinear Constraint for Obstacle 1
-        x_obs1 = 0.0
-        y_obs1 = 0.5
-        r_obs1 = 0.15
-        R1 = r_obs1 + self.turtlebot_radius + self.safety_distance
-        mpc.set_nl_cons(
-            'obs1',
-            R1**2 - ((model.x['x']-x_obs1)**2 + (model.x['y']-y_obs1)**2),
-            ub=0.0,
-            soft_constraint=False   # <-- no penalty, enforced strictly
-        )
-
-        # Nonlinear Constraint for Obstacle 2
-        x_obs2 = 0.0
-        y_obs2 = -0.5
-        r_obs2 = 0.15
-        R2 = r_obs2 + self.turtlebot_radius + self.safety_distance
-        mpc.set_nl_cons(
-            'obs2',
-            R2**2 - ((model.x['x']-x_obs2)**2 + (model.x['y']-y_obs2)**2),
-            ub=0.0,
-            soft_constraint=False   # <-- no penalty, enforced strictly
-        )
-        # After corner constraints, add edge midpoints
-        edge_midpoints = [
-            ((0.15, -0.075), (0.15, 0.075)),   # rear edge
-            ((0.45, -0.075), (0.45, 0.075)),   # front edge  
-            ((0.15, -0.075), (0.45, -0.075)),  # right edge
-            ((0.15, 0.075), (0.45, 0.075))     # left edge
-        ]
-
-        for edge_idx, ((dx1, dy1), (dx2, dy2)) in enumerate(edge_midpoints):
-            dx_mid = (dx1 + dx2) / 2
-            dy_mid = (dy1 + dy2) / 2
-            
-            for obs_x, obs_y, obs_r, obs_name in [
-                (0.0, 0.5, 0.15, 'obs1'),
-                (0.0, -0.5, 0.15, 'obs2')
-            ]:
-                R = obs_r + self.safety_distance
-                mid_x = model.x['x'] + dx_mid*ca.cos(model.x['th']) - dy_mid*ca.sin(model.x['th'])
-                mid_y = model.x['y'] + dx_mid*ca.sin(model.x['th']) + dy_mid*ca.cos(model.x['th'])
-                
-                mpc.set_nl_cons(
-                    f'{obs_name}_edge_{edge_idx}',
-                    R**2 - ((mid_x - obs_x)**2 + (mid_y - obs_y)**2),
-                    ub=0.0,
-                    soft_constraint=False
-                )
 
         template = mpc.get_tvp_template()
         def tvp_fun(t_now):
@@ -141,7 +133,7 @@ class MPC_Controller(Node):
         mpc.x0 = np.array([0.0, 0.0, 0.0]).reshape(-1, 1)
         mpc.set_initial_guess()
         return mpc
-        
+
     def goal_callback(self, msg):
         gx, gy = msg.position.x, msg.position.y
         self.goal = (gx, gy)
@@ -157,7 +149,6 @@ class MPC_Controller(Node):
         y = msg.pose.pose.position.y
         yaw = self.quaternion_to_yaw(msg.pose.pose.orientation)
 
-        # Run MPC only if we have a goal
         if self.goal is None:
             return
 
@@ -168,7 +159,6 @@ class MPC_Controller(Node):
         if distance < self.goal_tolerance:
             cmd.twist.linear.x = 0.0
             cmd.twist.angular.z = 0.0
-
         else:
             x0 = np.array([x, y, yaw]).reshape(-1, 1)
             u0 = self.mpc.make_step(x0)
@@ -202,4 +192,4 @@ def main(args=None):
         rclpy.shutdown()
 
 if __name__ == '__main__':
-    main()        
+    main()

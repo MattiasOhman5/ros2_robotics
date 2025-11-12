@@ -16,11 +16,5 @@ def generate_launch_description():
             executable='trajectory_circle',
             name='trajectory_circle',
             output='screen',
-        ),
-        Node(
-            package='mpc_pkg',
-            executable='visualization_node',
-            name='visualization_node',
-            output='screen',
         )
     ])
