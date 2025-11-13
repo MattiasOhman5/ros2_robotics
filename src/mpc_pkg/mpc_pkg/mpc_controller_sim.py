@@ -18,7 +18,7 @@ class MPC_Controller(Node):
         self.goal = None
         self.goal_tolerance = 0.05
         self.turtlebot_radius = 0.11
-        self.safety_distance = 0.05
+        self.safety_distance = 0.1
 
         self.model = self.defineTBotModel()
         self.mpc = self.defineTBotMPC(model=self.model, ts=0.1, N=20)
@@ -108,10 +108,10 @@ class MPC_Controller(Node):
         
         # --- Cap ----
         edge_midpoints = [
-            ((0.12, -0.125), (0.12, 0.125)),   # rear edge
-            ((0.48, -0.125), (0.48, 0.125)),   # front edge  
-            ((0.12, -0.125), (0.48, -0.125)),  # right edge
-            ((0.12, 0.125), (0.48, 0.125))     # left edge
+            ((0.1, -0.075), (0.1, 0.075)),   # rear edge
+            ((0.45, -0.075), (0.45, 0.075)),   # front edge  
+            ((0.1, -0.075), (0.45, -0.075)),  # right edge
+            ((0.1, 0.075), (0.45, 0.075))     # left edge
         ]
 
         for edge_idx, ((dx1, dy1), (dx2, dy2)) in enumerate(edge_midpoints):
