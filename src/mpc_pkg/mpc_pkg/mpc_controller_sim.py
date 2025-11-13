@@ -105,7 +105,8 @@ class MPC_Controller(Node):
             ub=0.0,
             soft_constraint=False   # <-- no penalty, enforced strictly
         )
-        # After corner constraints, add edge midpoints
+        
+        # --- Cap ----
         edge_midpoints = [
             ((0.15, -0.075), (0.15, 0.075)),   # rear edge
             ((0.45, -0.075), (0.45, 0.075)),   # front edge  
