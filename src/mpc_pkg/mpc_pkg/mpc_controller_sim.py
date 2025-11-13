@@ -16,9 +16,9 @@ class MPC_Controller(Node):
         self.goal_sub = self.create_subscription(Pose, '/next_setpoint', self.goal_callback, 10)
 
         self.goal = None
-        self.goal_tolerance = 0.15
+        self.goal_tolerance = 0.05
         self.turtlebot_radius = 0.11
-        self.safety_distance = 0.1
+        self.safety_distance = 0.05
 
         self.model = self.defineTBotModel()
         self.mpc = self.defineTBotMPC(model=self.model, ts=0.1, N=20)
